@@ -16,7 +16,7 @@ const devServerConfig = () => config => {
     ...config,
     proxy: {
       '/api/report': {
-        target: 'https://supply-dev.billbear.cn',
+        target: 'http://10.10.2.90',
         changeOrigin: true,
         secure: false,
         // pathRewrite: { '^/api/report': '' },
@@ -26,7 +26,7 @@ const devServerConfig = () => config => {
         }
       },
       '/api/supply-chain': {
-        target: 'https://supply-dev.billbear.cn',
+        target: 'https://10.10.2.90',
         // target: 'http://10.10.1.45:8080',
         changeOrigin: true,
         secure: false,
@@ -37,7 +37,7 @@ const devServerConfig = () => config => {
         }
       },
       '/api/usercenter/': {
-        target: 'https://data-dev.liexiong.net',
+        target: 'http://10.10.2.90',
         changeOrigin: true,
         secure: false,
         headers: {
