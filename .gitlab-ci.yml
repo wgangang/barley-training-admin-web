@@ -1,0 +1,74 @@
+variables:
+  # 项目构建类型: mvn8 mvn17 vue_node16 nuxt_node16
+  P_PACKAGE_TYPE: vue_node20
+  # K8S 服务名称
+  P_SERVICE_NAME: ${CI_PROJECT_NAME}
+  # Docker 名称
+  P_DOCKER_NAME: ${CI_PROJECT_NAME}
+  # 镜像名称
+  P_IMAGE_NAME: ${GL_DOCKER_VOLC_SHANYUAN}${P_DOCKER_NAME}:${CI_COMMIT_REF_NAME}
+  # 项目标题
+  P_PROJECT_NAME: 供应链/后台管理端（前端）
+  # 容器仓库类型 shlx shlz
+  P_DOCKER_AUTH_TYPE: volc_shanyuan
+  # 集群类型 shlx shlz
+  P_COLONY: supply-dev
+  # K8S命名空间 如果指定环境变量先取环境变量的变量 否则默认取P_NAMESPACE
+  P_NAMESPACE_DEV: supply-dev
+  P_NAMESPACE_TEST: supply-dev
+  P_BUILD_CMD: pnpm
+  P_PACKAGE_AFTER: mkdir -p ./dist && cp -a ./build/* ./dist/
+
+stages:
+  - build
+
+build-dev-job:
+  environment: dev
+  only:
+    refs:
+      - dev
+  stage: build
+  script:
+    - ${GL_DEPLOY} package localPath=micro-app/supply-chain
+    - ${GL_DOCKER_PACKAGE} ${P_IMAGE_NAME} .
+    - ${GL_DEPLOY} push
+    - ${GL_DEPLOY} remove imageName=${P_IMAGE_NAME}
+    - ${GL_DEPLOY} release colonyEnv=${CI_COMMIT_BRANCH}
+
+build-test-job:
+  environment: test
+  only:
+    refs:
+      - test
+  stage: build
+  script:
+    - ${GL_DEPLOY} package localPath=micro-app/supply-chain
+    - ${GL_DOCKER_PACKAGE} ${P_IMAGE_NAME} .
+    - ${GL_DEPLOY} push
+    - ${GL_DEPLOY} remove imageName=${P_IMAGE_NAME}
+    - ${GL_DEPLOY} release colonyEnv=${CI_COMMIT_BRANCH}
+
+build-prev-job:
+  environment: prev
+  only:
+    - tags
+  stage: build
+  script:
+    - ${GL_DEPLOY} package localPath=micro-app/supply-chain
+    - ${GL_DOCKER_PACKAGE} ${P_IMAGE_NAME} .
+    - ${GL_DEPLOY} push
+    - ${GL_DEPLOY} remove imageName=${P_IMAGE_NAME}
+    - ${GL_DEPLOY} release colonyEnv=prev
+
+build-prod-job:
+  environment: prod
+  only:
+    - web
+  stage: build
+  script:
+    - ${GL_DEPLOY} pull imageName=${GL_DOCKER_SHLX}${dockerName}:${t} auth=${authType}
+    - ${GL_DEPLOY} tag oldImageName=${GL_DOCKER_SHLX}${dockerName}:${t} newImageName=${GL_DOCKER_SHLX}${dockerName}:prod
+    - ${GL_DEPLOY} push imageName=${GL_DOCKER_SHLX}${dockerName}:prod auth=${authType}
+    - ${GL_DEPLOY} remove imageName=${GL_DOCKER_SHLX}${dockerName}:${t}
+    - ${GL_DEPLOY} remove imageName=${GL_DOCKER_SHLX}${dockerName}:prod
+    - ${GL_DEPLOY} release colonyEnv=prod

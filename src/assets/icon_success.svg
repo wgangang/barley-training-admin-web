@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" x="56" y="215"
+     data-name="operation-success" data-svg-id="7580c3b71d">
+  <g fill="none" fill-rule="evenodd">
+    <path d="M0 9c0 4.968 4.032 9 9 9s9-4.032 9-9-4.032-9-9-9-9 4.032-9 9z" fill="#29D221"/>
+    <path
+        d="M12.21 5.754a.875.875 0 0 1 1.312 1.153l-.079.09-5.292 5.25a.875.875 0 0 1-1.149.072l-.089-.078-2.66-2.688a.875.875 0 0 1 1.155-1.31l.089.079 2.043 2.064 4.67-4.632z"
+        fill="#FFF" fill-rule="nonzero"/>
+  </g>
+</svg>

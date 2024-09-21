@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16" fill="none"
+     data-icon="job_dev:FolderIcon">
+  <path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"
+        d="M1.10938 2.37695H7.80324L8.59075 3.90823H1.10938V2.37695Z" fill="#FA9600"></path>
+  <path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"
+        d="M14.0659 3.9082H1.10938V13.0959C1.10938 13.5187 1.47875 13.8615 1.93439 13.8615H14.0659C14.5215 13.8615 14.8909 13.5187 14.8909 13.0959V4.67384C14.8909 4.25099 14.5215 3.9082 14.0659 3.9082ZM5.34286 10.9377C5.1535 10.9377 5 11.0912 5 11.2805V11.7948C5 11.9841 5.1535 12.1377 5.34286 12.1377H10.6571C10.8465 12.1377 11 11.9841 11 11.7948V11.2805C11 11.0912 10.8465 10.9377 10.6571 10.9377H5.34286Z"
+        fill="#FBB02E"></path>
+</svg>
