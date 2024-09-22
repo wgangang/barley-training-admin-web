@@ -50,7 +50,7 @@ module.exports = {
     'no-case-declarations': 'off',
     'default-case': 'off',
     'no-return-assign': 'off',
-    'indent': ['error', 2],
+    indent: ['error', 2],
     'no-debugger': 'off',
     'comma-dangle': ['error', 'never'],
     'object-curly-newline': 'off',
