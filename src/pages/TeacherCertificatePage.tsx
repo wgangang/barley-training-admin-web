@@ -1,10 +1,10 @@
-import React, {useEffect, useRef} from 'react';
-import TableAutoDataPanel, {TableAutoDataPanelRef} from 'beer-assembly/TableAutoDataPanel';
-import {AutoTableRequest} from '@apis/report-api';
+import React, { useEffect, useRef } from 'react';
+import TableAutoDataPanel, { TableAutoDataPanelRef } from 'beer-assembly/TableAutoDataPanel';
+import { AutoTableRequest } from '@apis/report-api';
 import MyPageContainer from '@components/MyPageContainer';
-import {Button} from 'antd';
-import {useNavigate} from 'react-router-dom';
-import {Async} from '@/utils';
+import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Async } from '@/utils';
 
 const async = new Async();
 export default () => {
@@ -14,7 +14,7 @@ export default () => {
     navigate('/device-info/create/0');
   };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
-    console.log(eventName, value)
+    console.log(eventName, value);
   };
   useEffect(() => {
     tableRef?.current?.refresh();
