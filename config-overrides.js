@@ -25,7 +25,7 @@ const devServerConfig = () => config => {
           authorization: 'Bearer SYSTEM.497094a86dc94529bb08fbefd9fc366f.66f3d48a'
         }
       },
-      '/api/supply-chain': {
+      '/api/training': {
         target: 'https://10.10.2.90',
         // target: 'http://10.10.1.45:8080',
         changeOrigin: true,
