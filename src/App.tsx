@@ -74,7 +74,7 @@ const App: FC = () => {
           <Route path="/course-supervision" element={<Suspense><CourseSupervisionPage/></Suspense>}></Route>
           <Route path="/course-teacher-price" element={<Suspense><CourseTeacherPricePage/></Suspense>}></Route>
           <Route path="/project-funds" element={<Suspense><ProjectFundsPage/></Suspense>}></Route>
-          <Route path="/project-funds-flows" element={<Suspense><ProjectFundsFlowPage/></Suspense>}></Route>
+          <Route path="/project-funds-flow" element={<Suspense><ProjectFundsFlowPage/></Suspense>}></Route>
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

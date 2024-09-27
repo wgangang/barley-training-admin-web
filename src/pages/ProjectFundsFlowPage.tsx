@@ -26,7 +26,7 @@ export default () => {
       }}>
         <TableAutoDataPanel
           ref={tableRef}
-          code="PROJECCT_FUNDS_FLOW"
+          code="PROJECT_FUNDS_FLOW"
           request={AutoTableRequest}
           toolBarRender={<>
             <Button type="primary" onClick={onCreate}>创建设备</Button>
