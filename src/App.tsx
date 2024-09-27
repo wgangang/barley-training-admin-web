@@ -15,6 +15,13 @@ const TeacherTitlePage = lazy(() => import('@pages/TeacherTitlePage'));
 const TeacherCertificatePage = lazy(() => import('@pages/TeacherCertificatePage'));
 const TeacherEvaluationPage = lazy(() => import('@pages/TeacherEvaluationPage'));
 
+const ProjectPage = lazy(() => import('@pages/ProjectPage'));
+const ProjectClassPage = lazy(() => import('@pages/ProjectClassPage'));
+const CoursePage = lazy(() => import('@pages/CoursePage'));
+const CourseSupervisionPage = lazy(() => import('@pages/CourseSupervisionPage'));
+const CourseTeacherPricePage = lazy(() => import('@pages/CourseTeacherPricePage'));
+const ProjectFundsPage = lazy(() => import('@pages/ProjectFundsPage'));
+const ProjectFundsFlowPage = lazy(() => import('@pages/ProjectFundsFlowPage'));
 const App: FC = () => {
   return <div>
     <ConfigProvider theme={{
@@ -60,6 +67,14 @@ const App: FC = () => {
           <Route path="/teacher-title" element={<Suspense><TeacherTitlePage/></Suspense>}></Route>
           <Route path="/teacher-certificate" element={<Suspense><TeacherCertificatePage/></Suspense>}></Route>
           <Route path="/teacher-evaluation" element={<Suspense><TeacherEvaluationPage/></Suspense>}></Route>
+          {/*项目*/}
+          <Route path="/project" element={<Suspense><ProjectPage/></Suspense>}></Route>
+          <Route path="/project-class" element={<Suspense><ProjectClassPage/></Suspense>}></Route>
+          <Route path="/course" element={<Suspense><CoursePage/></Suspense>}></Route>
+          <Route path="/course-supervision" element={<Suspense><CourseSupervisionPage/></Suspense>}></Route>
+          <Route path="/course-teacher-price" element={<Suspense><CourseTeacherPricePage/></Suspense>}></Route>
+          <Route path="/project-funds" element={<Suspense><ProjectFundsPage/></Suspense>}></Route>
+          <Route path="/project-funds-flows" element={<Suspense><ProjectFundsFlowPage/></Suspense>}></Route>
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

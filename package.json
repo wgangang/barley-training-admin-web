@@ -21,7 +21,7 @@
     "@uiw/react-codemirror": "^4.21.24",
     "@wecom/jssdk": "^1.4.5",
     "antd": "^5.10.0",
-    "beer-assembly": "^1.1.1-alpha.48",
+    "beer-assembly": "^1.1.1-alpha.51",
     "beer-network": "^1.1.1-alpha.14",
     "codemirror": "^6.0.1",
     "dayjs": "^1.11.10",
