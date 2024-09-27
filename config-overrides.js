@@ -22,7 +22,7 @@ const devServerConfig = () => config => {
         // pathRewrite: { '^/api/report': '' },
         headers: {
           uid: '1',
-          authorization: 'Bearer SYSTEM.497094a86dc94529bb08fbefd9fc366f.66f3d48a'
+          authorization: 'Bearer SYSTEM.f405911fff5c40a5a87453df11d8e7cb.66f8c1ea'
         }
       },
       '/api/training': {
@@ -33,7 +33,7 @@ const devServerConfig = () => config => {
         // pathRewrite: { '^/api/supply-chain': '' },
         headers: {
           uid: '1',
-          authorization: 'Bearer SYSTEM.497094a86dc94529bb08fbefd9fc366f.66f3d48a'
+          authorization: 'Bearer SYSTEM.f405911fff5c40a5a87453df11d8e7cb.66f8c1ea'
         }
       },
       '/api/usercenter/': {
@@ -41,7 +41,7 @@ const devServerConfig = () => config => {
         changeOrigin: true,
         secure: false,
         headers: {
-          Authorization: 'Bearer SYSTEM.497094a86dc94529bb08fbefd9fc366f.66f3d48a'
+          Authorization: 'Bearer SYSTEM.f405911fff5c40a5a87453df11d8e7cb.66f8c1ea'
         }
       }
     }
