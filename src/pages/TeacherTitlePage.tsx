@@ -1,16 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import TableAutoDataPanel, { TableAutoDataPanelRef } from 'beer-assembly/TableAutoDataPanel';
 import { AutoTableRequest } from '@apis/report-api';
-import teacherTitleApi from '@apis/teacher-title-api';
+import teacherApi from '@apis/teacher-api';
 import MyPageContainer from '@components/MyPageContainer';
 import { Button, message } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import { Async } from '@/utils';
 import { Modals } from '@/Modals';
 
 const async = new Async();
 export default () => {
-  const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
   const [teacherTitleModalApi, contextTeacherTitleHolder] = Modals.useTeacherTitle();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
@@ -19,7 +17,7 @@ export default () => {
   };
   const onOpen = (value?: {}) => {
     teacherTitleModalApi.ok(async (params: {}) => {
-      const result = await teacherTitleApi?.save(params);
+      const result = await teacherApi?.saveTitle(params);
       if (result.success) {
         messageApi.success('保存成功！');
       } else {
@@ -34,11 +32,10 @@ export default () => {
       return;
     }
     if (eventName === 'DELETE') {
-      const result = await teacherTitleApi?.remove(value.id);
+      const result = await teacherApi?.removeTitle(value.id);
       if (result.success) {
         messageApi.success('删除成功！')
           .then();
-        navigate(-1);
       } else {
         messageApi.error(result.message)
           .then();
