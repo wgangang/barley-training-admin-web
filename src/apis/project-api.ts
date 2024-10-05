@@ -9,6 +9,14 @@ class ProjectApi extends Fetch {
   async remove(id: string) {
     return this.delete('/project/' + id);
   }
+
+  async saveClass(params: {}) {
+    return this.postBody('/project/class/save', undefined, params);
+  }
+
+  async removeClass(id: string) {
+    return this.delete('/project/class/' + id);
+  }
 }
 
 const api = new ProjectApi((process.env.REQUEST_BASE_URL || '') + '/barley');

@@ -1,19 +1,48 @@
 import React, { useEffect, useRef } from 'react';
 import TableAutoDataPanel, { TableAutoDataPanelRef } from 'beer-assembly/TableAutoDataPanel';
 import { AutoTableRequest } from '@apis/report-api';
+import projectApi from '@apis/project-api';
 import MyPageContainer from '@components/MyPageContainer';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { Async } from '@/utils';
+import { Modals } from '@/Modals';
 
 const async = new Async();
 export default () => {
-  const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [projectClassModalApi, contextProjectClassHolder] = Modals.useProjectClass();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
   const onCreate = () => {
-    navigate('/device-info/create/0');
+    onOpen();
+  };
+  const onOpen = (value?: {}) => {
+    projectClassModalApi.ok(async (params) => {
+      const result = await projectApi?.saveClass(params);
+      if (result.success) {
+        messageApi.success('保存成功！');
+      } else {
+        messageApi.error(result.message);
+      }
+      return result.success;
+    }, undefined, value);
   };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
+    if (eventName === 'EDIT') {
+      onOpen(value);
+      return;
+    }
+    if (eventName === 'DELETE') {
+      const result = await projectApi?.removeClass(value.id);
+      if (result.success) {
+        messageApi.success('删除成功！')
+          .then();
+      } else {
+        messageApi.error(result.message)
+          .then();
+      }
+      return;
+    }
     console.log(eventName, value);
   };
   useEffect(() => {
@@ -29,7 +58,7 @@ export default () => {
           code="PROJECT_CLASS"
           request={AutoTableRequest}
           toolBarRender={<>
-            <Button type="primary" onClick={onCreate}>创建设备</Button>
+            <Button type="primary" onClick={onCreate}>新增</Button>
           </>}
           onChangeEvent={async (event, value) => {
             return async.run(async () => {
@@ -39,6 +68,8 @@ export default () => {
           }}
         />
       </MyPageContainer>
+      {contextHolder}
+      {contextProjectClassHolder}
     </>
   );
 };
