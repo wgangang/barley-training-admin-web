@@ -15,6 +15,7 @@ const ClassroomReservationPage = lazy(() => import('@pages/ClassroomReservationP
 const ClassroomReservationDetailPage = lazy(() => import('@pages/detail/ClassroomReservationDetailPage'));
 
 const TeacherPage = lazy(() => import('@pages/TeacherPage'));
+const TeacherDetailPage = lazy(() => import('@pages/detail/TeacherDetailPage'));
 const TeacherTitlePage = lazy(() => import('@pages/TeacherTitlePage'));
 const TeacherCertificatePage = lazy(() => import('@pages/TeacherCertificatePage'));
 const TeacherEvaluationPage = lazy(() => import('@pages/TeacherEvaluationPage'));
@@ -77,7 +78,10 @@ const App: FC = () => {
             <Route path="edit/:id" element={<Suspense><ClassroomReservationDetailPage/></Suspense>}/>
           </Route>
           {/*教师*/}
-          <Route path="/teacher" element={<Suspense><TeacherPage/></Suspense>}></Route>
+          <Route path="/teacher" element={<Suspense><TeacherPage/></Suspense>}>
+            <Route path="create/:type" element={<Suspense><TeacherDetailPage/></Suspense>}/>
+            <Route path="edit/:type" element={<Suspense><TeacherDetailPage/></Suspense>}/>
+          </Route>
           <Route path="/teacher-title" element={<Suspense><TeacherTitlePage/></Suspense>}></Route>
           <Route path="/teacher-certificate" element={<Suspense><TeacherCertificatePage/></Suspense>}></Route>
           <Route path="/teacher-evaluation" element={<Suspense><TeacherEvaluationPage/></Suspense>}>

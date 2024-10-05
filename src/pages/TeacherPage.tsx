@@ -11,7 +11,7 @@ export default () => {
   const navigate = useNavigate();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
   const onCreate = () => {
-    navigate('/device-info/create/0');
+    navigate('/teacher/create/0');
   };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
     console.log(eventName, value);
@@ -29,7 +29,7 @@ export default () => {
           code="TEACHER"
           request={AutoTableRequest}
           toolBarRender={<>
-            <Button type="primary" onClick={onCreate}>创建设备</Button>
+            <Button type="primary" onClick={onCreate}>新增</Button>
           </>}
           onChangeEvent={async (event, value) => {
             return async.run(async () => {
