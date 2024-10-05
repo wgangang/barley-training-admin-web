@@ -6,8 +6,11 @@ import zhCN from 'antd/lib/locale/zh_CN';
 const HomePage = lazy(() => import('@pages/HomePage'));
 
 const DeviceInfoPage = lazy(() => import('@pages/DeviceInfoPage'));
+const DeviceInfoDetailPage = lazy(() => import('@pages/detail/DeviceInfoDetailPage'));
 
 const ClassroomPage = lazy(() => import('@pages/ClassroomPage'));
+const ClassroomPageDetailPage = lazy(() => import('@pages/detail/ClassroomPageDetailPage'));
+
 const ClassroomReservationPage = lazy(() => import('@pages/ClassroomReservationPage'));
 
 const TeacherPage = lazy(() => import('@pages/TeacherPage'));
@@ -58,9 +61,15 @@ const App: FC = () => {
         <Routes>
           <Route path="/home" element={<Suspense><HomePage/></Suspense>}></Route>
           {/*设备*/}
-          <Route path="/device-info" element={<Suspense><DeviceInfoPage/></Suspense>}></Route>
+          <Route path="/device-info" element={<Suspense><DeviceInfoPage/></Suspense>}>
+            <Route path="create/:id" element={<Suspense><DeviceInfoDetailPage/></Suspense>}/>
+            <Route path="edit/:id" element={<Suspense><DeviceInfoDetailPage/></Suspense>}/>
+          </Route>
           {/*教室*/}
-          <Route path="/classroom" element={<Suspense><ClassroomPage/></Suspense>}></Route>
+          <Route path="/classroom" element={<Suspense><ClassroomPage/></Suspense>}>
+            <Route path="create/:id" element={<Suspense><ClassroomPageDetailPage/></Suspense>}/>
+            <Route path="edit/:id" element={<Suspense><ClassroomPageDetailPage/></Suspense>}/>
+          </Route>
           <Route path="/classroom-reservation" element={<Suspense><ClassroomReservationPage/></Suspense>}></Route>
           {/*教师*/}
           <Route path="/teacher" element={<Suspense><TeacherPage/></Suspense>}></Route>
