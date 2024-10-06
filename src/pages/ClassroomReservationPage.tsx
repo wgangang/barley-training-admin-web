@@ -21,7 +21,7 @@ export default () => {
       if (result.success) {
         messageApi.success('删除成功！')
           .then();
-        navigate(-1);
+        tableRef?.current?.refreshData();
       } else {
         messageApi.error(result.message)
           .then();

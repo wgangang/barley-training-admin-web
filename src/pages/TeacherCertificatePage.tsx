@@ -20,6 +20,7 @@ export default () => {
       const result = await teacherApi?.saveCertificate(params);
       if (result.success) {
         messageApi.success('保存成功！');
+        tableRef?.current?.refreshData();
       } else {
         messageApi.error(result.message);
       }
@@ -36,6 +37,7 @@ export default () => {
       if (result.success) {
         messageApi.success('删除成功！')
           .then();
+        tableRef?.current?.refreshData();
       } else {
         messageApi.error(result.message)
           .then();
