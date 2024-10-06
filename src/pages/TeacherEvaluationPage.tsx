@@ -36,7 +36,7 @@ export default () => {
   return (
     <>
       <MyPageContainer title="师资评估" onRefresh={() => {
-        tableRef?.current?.refresh();
+        tableRef?.current?.refreshData();
       }}>
         <TableAutoDataPanel
           ref={tableRef}
