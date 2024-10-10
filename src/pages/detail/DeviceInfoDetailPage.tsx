@@ -5,7 +5,8 @@ import { Button, Col, DatePicker, Form, Input, Row, Select, Space } from 'antd';
 import ImagesContainer from 'beer-assembly/ImagesContainer';
 import s3Api from '@apis/s3-api';
 import reportApi from '@apis/report-api';
-import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
+import { useNavigate, useParams } from 'react-router-dom';
 import deviceInfoApi from '@apis/device-info-api';
 import ParentContext from '@/content/ParentContext';
 
@@ -16,6 +17,7 @@ export default () => {
   } = useContext(ParentContext);
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const { id } = useParams();
   const [deviceTypeList, setDeviceTypeList] = useState([]);
   const onConfirm = async () => {
     const params = {
@@ -45,12 +47,25 @@ export default () => {
         }
         setDeviceTypeList(result.data);
       });
+    if (id === undefined || id === '') {
+      return;
+    }
+    reportApi.getStatistics<{ purchaseDate: string }>('BASIC_DEVICE_INFO', { id })
+      .then(result => {
+        form.setFieldsValue({
+          ...(result.data || {}),
+          purchaseDate: result.data?.purchaseDate === undefined ? undefined : dayjs(result.data?.purchaseDate)
+        });
+      });
   }, []);
   return (
     <>
       <BackPageContainer title="设备信息">
         <MyCard title="设备管理" width={800}>
           <Form layout="vertical" form={form}>
+            <Form.Item hidden={true} name="id">
+              <Input></Input>
+            </Form.Item>
             <Row>
               <Col span={11}>
                 <Form.Item label="设备名称" name="deviceName">

@@ -15,22 +15,11 @@ const devServerConfig = () => config => {
   return {
     ...config,
     proxy: {
-      '/api/report': {
+      '/api': {
         target: 'http://10.10.2.90',
         changeOrigin: true,
         secure: false,
         // pathRewrite: { '^/api/report': '' },
-        headers: {
-          uid: '1',
-          authorization: 'Bearer SYSTEM.784313ebd6f1491094f4ea26a65c9c94.670a0ddf'
-        }
-      },
-      '/api/barley': {
-        target: 'https://10.10.2.90',
-        // target: 'http://10.10.1.45:8080',
-        changeOrigin: true,
-        secure: false,
-        // pathRewrite: { '^/api/supply-chain': '' },
         headers: {
           uid: '1',
           authorization: 'Bearer SYSTEM.784313ebd6f1491094f4ea26a65c9c94.670a0ddf'

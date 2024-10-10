@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
-import { Button, Col, DatePicker, Form, InputNumber, Radio, Row, Select, Space } from 'antd';
+import { Button, Col, DatePicker, Form, Input, InputNumber, Radio, Row, Select, Space } from 'antd';
 import ImagesContainer from 'beer-assembly/ImagesContainer';
+import dayjs from 'dayjs';
 import s3Api from '@apis/s3-api';
 import reportApi from '@apis/report-api';
 import teacherApi from '@apis/teacher-api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ParentContext from '@/content/ParentContext';
 
 export default () => {
@@ -15,6 +16,7 @@ export default () => {
     messageApi
   } = useContext(ParentContext);
   const [form] = Form.useForm();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [teacherList, setTeacherList] = useState([]);
   const [projectList, setProjectList] = useState([]);
@@ -45,12 +47,25 @@ export default () => {
       .then(result => {
         setProjectList(result.data);
       });
+    if (id === undefined || id === '') {
+      return;
+    }
+    reportApi.getStatistics<{ evaluationDate: string }>('BASIC_TEACHER_EVALUATION', { id })
+      .then(result => {
+        form.setFieldsValue({
+          ...(result.data || {}),
+          evaluationDate: result.data?.evaluationDate === undefined ? undefined : dayjs(result.data?.evaluationDate)
+        });
+      });
   }, []);
   return (
     <>
       <BackPageContainer title="师资评估">
         <MyCard title="师资评估" width={800}>
           <Form layout="vertical" form={form}>
+            <Form.Item hidden={true} name="id">
+              <Input></Input>
+            </Form.Item>
             <Row>
               <Col span={11}>
                 <Form.Item label="教师" name="teacherId">

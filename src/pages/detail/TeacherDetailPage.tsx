@@ -2,7 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
 import { Button, Col, DatePicker, Form, Input, Radio, Row, Select, Space } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import ImagesContainer from 'beer-assembly/ImagesContainer';
+import dayjs from 'dayjs';
+import s3Api from '@apis/s3-api';
 import teacherApi from '@apis/teacher-api';
 import reportApi from '@apis/report-api';
 import ParentContext from '@/content/ParentContext';
@@ -13,6 +16,7 @@ export default () => {
     messageApi
   } = useContext(ParentContext);
   const [form] = Form.useForm();
+  const { id } = useParams();
   const [educationList, _setEducationList] = useState([
     {
       label: '大专',
@@ -62,12 +66,25 @@ export default () => {
       .then(result => {
         setTeacherTitleList(result.data);
       });
+    if (id === undefined || id === '') {
+      return;
+    }
+    reportApi.getStatistics<{ birthDate: string }>('BASIC_TEACHER_INFO', { id })
+      .then(result => {
+        form.setFieldsValue({
+          ...(result.data || {}),
+          birthDate: result.data?.birthDate === undefined ? undefined : dayjs(result.data?.birthDate)
+        });
+      });
   }, []);
   return (
     <>
       <BackPageContainer title="师资信息">
         <MyCard title="教师简介" width={800}>
           <Form layout="vertical" form={form}>
+            <Form.Item hidden={true} name="id">
+              <Input></Input>
+            </Form.Item>
             <Row>
               <Col span={11}>
                 <Form.Item label="姓名" name="name">
@@ -140,6 +157,14 @@ export default () => {
                   <Input.TextArea rows={3} style={{ width: '100%' }}></Input.TextArea>
                 </Form.Item>
               </Col>
+            </Row>
+            <Row>
+              <Form.Item label="附件" name="files">
+                <ImagesContainer
+                  action={process.env.IMAGE_URL || ''}
+                  requestUrl={async (url) => s3Api.getUrl(url)
+                    .then(a => a.data)}/>
+              </Form.Item>
             </Row>
           </Form>
           <Row style={{ marginTop: 24 }}>

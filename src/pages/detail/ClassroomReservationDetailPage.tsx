@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
 import { Button, Col, DatePicker, Form, Input, Row, Select, Space, TimePicker } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 import classroomApi from '@apis/classroom-api';
 import reportApi from '@apis/report-api';
 import ParentContext from '@/content/ParentContext';
@@ -14,6 +15,7 @@ export default () => {
   } = useContext(ParentContext);
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const { id } = useParams();
   const [classroomList, setClassroomList] = useState([]);
   const [durationList, _setDurationList] = useState([
     {
@@ -41,6 +43,7 @@ export default () => {
       value: '180'
     }
   ]);
+  const [cycleList, setCycleList] = useState([]);
   const [classroomId, setClassroomId] = useState('');
   const onConfirm = async () => {
     const params = {
@@ -82,12 +85,30 @@ export default () => {
       .then(result => {
         setClassroomList(result.data || []);
       });
+    reportApi.getDataList<[]>('BASIC_RESERVATION_CYCLE', {})
+      .then(result => {
+        setCycleList(result.data || []);
+      });
+    if (id === undefined || id === '') {
+      return;
+    }
+    reportApi.getStatistics<{ startDate: string, endDate: string, reservationTime: string }>('BASIC_CLASSROOM_RESERVATION_INFO', { id })
+      .then(result => {
+        form.setFieldsValue({
+          ...(result.data || {}),
+          date: result?.data?.startDate === undefined || result?.data?.endDate === undefined ? undefined : [dayjs(result.data.startDate), dayjs(result.data.endDate)],
+          reservationTime: result?.data?.reservationTime === undefined ? undefined : dayjs(result.data.reservationTime, 'HH:mm:ss')
+        });
+      });
   }, []);
   return (
     <>
       <BackPageContainer title="教室预定">
         <MyCard title="预定管理" width={800}>
           <Form layout="vertical" form={form} initialValues={{ duration: '30' }}>
+            <Form.Item hidden={true} name="id">
+              <Input></Input>
+            </Form.Item>
             <Row>
               <Col span={11}>
                 <Form.Item label="教室" name="classroomId">
@@ -116,6 +137,11 @@ export default () => {
             </Row>
             <Row>
               <Col span={11}>
+                <Form.Item label="周期" name="cycle">
+                  <Select options={cycleList}></Select>
+                </Form.Item>
+              </Col>
+              <Col offset={1} span={11}>
                 <Form.Item label="时长" name="duration">
                   <Select options={durationList}></Select>
                 </Form.Item>
