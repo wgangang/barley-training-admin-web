@@ -67,7 +67,11 @@ export class Modals {
     const callbackRef = useRef<((params: TeacherCertificatesParams) => Promise<boolean>) | undefined>(undefined);
     const onConfirm = async () => {
       if (callbackRef.current) {
-        if (await callbackRef.current?.(form.getFieldsValue())) {
+        if (await callbackRef.current?.({
+          ...form.getFieldsValue(),
+          acquisitionDate: form.getFieldValue('acquisitionDate')
+            ?.format('YYYY-MM-DD')
+        })) {
           setIsOpenModal(false);
         }
       } else {
@@ -77,7 +81,11 @@ export class Modals {
     const handler: Handler<TeacherCertificatesParams> = {
       ok: (callback: (params: TeacherCertificatesParams) => Promise<boolean>, args?: {}, initialValues?: {}) => {
         form.resetFields();
-        form.setFieldsValue(initialValues);
+        const params: any = initialValues;
+        form.setFieldsValue({
+          ...initialValues,
+          acquisitionDate: params?.acquisitionDate === undefined ? undefined : dayjs(params?.acquisitionDate)
+        });
         callbackRef.current = callback;
         setIsOpenModal(true);
         reportApi.getDataList<[]>('BASIC_TEACHER_LIST')
@@ -105,6 +113,9 @@ export class Modals {
           <Form.Item name="teacherId" label="教师">
             <Select options={teacherList}></Select>
           </Form.Item>
+          <Form.Item name="certificateCode" label="证书编号">
+            <Input></Input>
+          </Form.Item>
           <Form.Item name="certificateName" label="证书名称">
             <Input></Input>
           </Form.Item>
@@ -112,7 +123,7 @@ export class Modals {
             <Input></Input>
           </Form.Item>
           <Form.Item name="acquisitionDate" label="颁发日期">
-            <Input></Input>
+            <DatePicker style={{ width: '100%' }}></DatePicker>
           </Form.Item>
         </Form>
       </Modal>
@@ -403,6 +414,14 @@ export class Modals {
             </Form.Item>
             <Form.Item name="classroomId" label="教室" style={{ width: '100%' }}>
               <Select options={classRoomList}></Select>
+            </Form.Item>
+          </Flux>
+          <Flux size={12}>
+            <Form.Item name="supervise" label="督导员" style={{ width: '100%' }}>
+              <Input></Input>
+            </Form.Item>
+            <Form.Item name="supervisePhone" label="督导电话" style={{ width: '100%' }}>
+              <Input></Input>
             </Form.Item>
           </Flux>
           <Flux size={12}>

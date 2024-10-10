@@ -41,13 +41,15 @@ export default () => {
       value: '180'
     }
   ]);
+  const [classroomId, setClassroomId] = useState('');
   const onConfirm = async () => {
     const params = {
       ...form.getFieldsValue(),
       date: undefined,
       startDate: form.getFieldValue('date')?.[0]?.format('YYYY-MM-DD'),
       endDate: form.getFieldValue('date')?.[1]?.format('YYYY-MM-DD'),
-      reservationTime: form.getFieldValue('reservationTime')?.format('HH:mm:ss')
+      reservationTime: form.getFieldValue('reservationTime')
+        ?.format('HH:mm:ss')
     };
     const result = await classroomApi.saveReservation(params);
     if (result.success) {
@@ -64,6 +66,18 @@ export default () => {
     navigate(-1);
   };
   useEffect(() => {
+    if (classroomId === '') {
+      return;
+    }
+    reportApi.getStatistics<{ capacity: string }>('BASIC_CLASSROOM_INFO', { id: classroomId })
+      .then(result => {
+        if (!result.success) {
+          return;
+        }
+        form.setFieldValue('capacity', result.data?.capacity);
+      });
+  }, [classroomId]);
+  useEffect(() => {
     reportApi.getDataList<[]>('BASIC_CLASSROOM_LIST', {})
       .then(result => {
         setClassroomList(result.data || []);
@@ -76,8 +90,10 @@ export default () => {
           <Form layout="vertical" form={form} initialValues={{ duration: '30' }}>
             <Row>
               <Col span={11}>
-                <Form.Item label="教室" name="classroomCode">
-                  <Select options={classroomList}></Select>
+                <Form.Item label="教室" name="classroomId">
+                  <Select options={classroomList} onChange={(e) => {
+                    setClassroomId(e);
+                  }}></Select>
                 </Form.Item>
               </Col>
               <Col offset={1} span={11}>

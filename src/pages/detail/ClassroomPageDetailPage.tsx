@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
 import { Button, Col, Form, Input, Row, Select, Space } from 'antd';
+import reportApi from '@apis/report-api';
 import { useNavigate } from 'react-router-dom';
 import classroomApi from '@apis/classroom-api';
 import ParentContext from '@/content/ParentContext';
@@ -19,6 +20,7 @@ export default () => {
       value: 'TRAIN'
     }
   ]);
+  const [deviceList, setDeviceList] = useState([]);
   const onConfirm = async () => {
     const params = {
       ...form.getFieldsValue()
@@ -37,6 +39,12 @@ export default () => {
   const onCancel = () => {
     navigate(-1);
   };
+  useEffect(() => {
+    reportApi.getDataList<[]>('BASIC_DEVICE_LIST')
+      .then(result => {
+        setDeviceList(result.data);
+      });
+  }, []);
   return (
     <>
       <BackPageContainer title="教室信息">
@@ -66,6 +74,9 @@ export default () => {
                 </Form.Item>
               </Col>
             </Row>
+            <Form.Item label="设备列表" name="device">
+              <Select options={deviceList} mode="multiple"></Select>
+            </Form.Item>
           </Form>
           <Row style={{ marginTop: 24 }}>
             <Col>

@@ -51,9 +51,7 @@ export default () => {
   }, []);
   return (
     <>
-      <MyPageContainer title="师资资质" onRefresh={() => {
-        tableRef?.current?.refresh();
-      }}>
+      <MyPageContainer title="师资资质">
         <TableAutoDataPanel
           ref={tableRef}
           code="TEACHER_CERTIFICATE"

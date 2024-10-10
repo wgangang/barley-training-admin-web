@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
-import { Button, Col, DatePicker, Form, Input, Row, Space } from 'antd';
+import { Button, Col, DatePicker, Form, Input, Row, Select, Space } from 'antd';
 import ImagesContainer from 'beer-assembly/ImagesContainer';
 import s3Api from '@apis/s3-api';
+import reportApi from '@apis/report-api';
 import { useNavigate } from 'react-router-dom';
 import deviceInfoApi from '@apis/device-info-api';
 import ParentContext from '@/content/ParentContext';
@@ -15,6 +16,7 @@ export default () => {
   } = useContext(ParentContext);
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const [deviceTypeList, setDeviceTypeList] = useState([]);
   const onConfirm = async () => {
     const params = {
       ...form.getFieldsValue(),
@@ -35,6 +37,15 @@ export default () => {
   const onCancel = () => {
     navigate(-1);
   };
+  useEffect(() => {
+    reportApi.getDataList<[]>('BASIC_DEVICE_TYPE')
+      .then(result => {
+        if (!result.success) {
+          return;
+        }
+        setDeviceTypeList(result.data);
+      });
+  }, []);
   return (
     <>
       <BackPageContainer title="设备信息">
@@ -59,6 +70,18 @@ export default () => {
                 </Form.Item>
               </Col>
               <Col offset={1} span={11}>
+                <Form.Item label="序列号" name="serialNumber">
+                  <Input></Input>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={11}>
+                <Form.Item label="设备类型" name="deviceType">
+                  <Select options={deviceTypeList}></Select>
+                </Form.Item>
+              </Col>
+              <Col offset={1} span={11}>
                 <Form.Item label="设备型号" name="model">
                   <Input></Input>
                 </Form.Item>
@@ -66,11 +89,6 @@ export default () => {
             </Row>
             <Row>
               <Col span={11}>
-                <Form.Item label="序列号" name="serialNumber">
-                  <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col offset={1} span={11}>
                 <Form.Item label="购买日期" name="purchaseDate">
                   <DatePicker style={{ width: '100%' }}></DatePicker>
                 </Form.Item>

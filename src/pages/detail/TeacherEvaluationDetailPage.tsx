@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
-import { Button, Col, Form, InputNumber, Radio, Row, Select, Space } from 'antd';
+import { Button, Col, DatePicker, Form, InputNumber, Radio, Row, Select, Space } from 'antd';
 import ImagesContainer from 'beer-assembly/ImagesContainer';
 import s3Api from '@apis/s3-api';
 import reportApi from '@apis/report-api';
@@ -70,6 +70,13 @@ export default () => {
                 </Form.Item>
               </Col>
               <Col offset={1} span={11}>
+                <Form.Item label="评估日期" name="evaluationDate">
+                  <DatePicker style={{ width: '100%' }}/>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={11}>
                 <Form.Item label="评估结果" name="result">
                   <Radio.Group>
                     <Radio value="PASS">通过</Radio>
