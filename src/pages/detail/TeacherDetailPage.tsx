@@ -3,7 +3,7 @@ import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
 import { Button, Col, DatePicker, Form, Input, Radio, Row, Select, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import deviceInfoApi from '@apis/device-info-api';
+import teacherApi from '@apis/teacher-api';
 import reportApi from '@apis/report-api';
 import ParentContext from '@/content/ParentContext';
 
@@ -43,7 +43,7 @@ export default () => {
       birthDate: form.getFieldValue('birthDate')
         ?.format('YYYY-MM-DD')
     };
-    const result = await deviceInfoApi.save(params);
+    const result = await teacherApi.save(params);
     if (result.success) {
       messageApi?.success('保存成功！')
         .then();

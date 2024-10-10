@@ -1,6 +1,13 @@
 import Fetch from 'beer-network/api';
 
 class TeacherApi extends Fetch {
+  async save(params: any) {
+    return this.postBody('/teacher-info/save', undefined, params);
+  }
+
+  async remove(id: string) {
+    return this.delete('/teacher-info/' + id);
+  }
 
   async saveTitle(params: {}) {
     return this.postBody('/teacher/title/save', undefined, params);

@@ -80,7 +80,7 @@ export class Modals {
         form.setFieldsValue(initialValues);
         callbackRef.current = callback;
         setIsOpenModal(true);
-        reportApi.getDataList<[]>('TEACHER_LIST')
+        reportApi.getDataList<[]>('BASIC_TEACHER_LIST')
           .then(result => {
             setTeacherList(result.data);
           });
@@ -230,7 +230,7 @@ export class Modals {
         });
         callbackRef.current = callback;
         setIsOpenModal(true);
-        reportApi?.getDataList<[]>('PROJECT_LIST')
+        reportApi?.getDataList<[]>('BASIC_PROJECT_LIST')
           .then(result => {
             setProjectList(result.data);
           });
@@ -355,19 +355,19 @@ export class Modals {
         });
         callbackRef.current = callback;
         setIsOpenModal(true);
-        reportApi?.getDataList<[]>('PROJECT_LIST')
+        reportApi?.getDataList<[]>('BASIC_PROJECT_LIST')
           .then(result => {
             setProjectList(result.data);
           });
-        reportApi?.getDataList<[]>('TEACHER_LIST')
+        reportApi?.getDataList<[]>('BASIC_TEACHER_LIST')
           .then(result => {
             setTeacherList(result.data);
           });
-        reportApi?.getDataList<[]>('PROJECT_CLASS_LIST')
+        reportApi?.getDataList<[]>('BASIC_PROJECT_CLASS_LIST')
           .then(result => {
             setProjectClassList(result.data);
           });
-        reportApi?.getDataList<[]>('CLASSROOM_LIST')
+        reportApi?.getDataList<[]>('BASIC_CLASSROOM_LIST')
           .then(result => {
             setClassRoomList(result.data);
           });
@@ -457,11 +457,11 @@ export class Modals {
         });
         callbackRef.current = callback;
         setIsOpenModal(true);
-        reportApi?.getDataList<[]>('PROJECT_LIST')
+        reportApi?.getDataList<[]>('BASIC_PROJECT_LIST')
           .then(result => {
             setProjectList(result.data);
           });
-        reportApi?.getDataList<[]>('TEACHER_LIST')
+        reportApi?.getDataList<[]>('BASIC_TEACHER_LIST')
           .then(result => {
             setTeacherList(result.data);
           });

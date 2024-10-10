@@ -14,32 +14,7 @@ export default () => {
   } = useContext(ParentContext);
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const [classroomList, setClassroomList] = useState([
-    {
-      label: '30分钟',
-      value: '30'
-    },
-    {
-      label: '1小时',
-      value: '60'
-    },
-    {
-      label: '1.5小时',
-      value: '90'
-    },
-    {
-      label: '2小时',
-      value: '120'
-    },
-    {
-      label: '2.5小时',
-      value: '150'
-    },
-    {
-      label: '3小时',
-      value: '180'
-    }
-  ]);
+  const [classroomList, setClassroomList] = useState([]);
   const [durationList, _setDurationList] = useState([
     {
       label: '30分钟',
@@ -89,7 +64,7 @@ export default () => {
     navigate(-1);
   };
   useEffect(() => {
-    reportApi.getDataList<[]>('CLASSROOM_LIST', {})
+    reportApi.getDataList<[]>('BASIC_CLASSROOM_LIST', {})
       .then(result => {
         setClassroomList(result.data || []);
       });

@@ -37,11 +37,11 @@ export default () => {
     navigate(-1);
   };
   useEffect(() => {
-    reportApi.getDataList<[]>('TEACHER_LIST')
+    reportApi.getDataList<[]>('BASIC_TEACHER_LIST')
       .then(result => {
         setTeacherList(result.data);
       });
-    reportApi.getDataList<[]>('PROJECT_LIST')
+    reportApi.getDataList<[]>('BASIC_PROJECT_LIST')
       .then(result => {
         setProjectList(result.data);
       });

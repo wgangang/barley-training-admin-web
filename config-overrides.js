@@ -25,7 +25,7 @@ const devServerConfig = () => config => {
           authorization: 'Bearer SYSTEM.784313ebd6f1491094f4ea26a65c9c94.670a0ddf'
         }
       },
-      '/api/training': {
+      '/api/barley': {
         target: 'https://10.10.2.90',
         // target: 'http://10.10.1.45:8080',
         changeOrigin: true,
