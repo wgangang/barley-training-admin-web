@@ -2,18 +2,24 @@ import React, { useEffect, useRef } from 'react';
 import TableAutoDataPanel, { TableAutoDataPanelRef } from 'beer-assembly/TableAutoDataPanel';
 import { AutoTableRequest } from '@apis/report-api';
 import MyPageContainer from '@components/MyPageContainer';
-import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Button, Divider, Space } from 'antd';
 import { Async } from '@/utils';
+import { Modals } from '@/Modals';
 
 const async = new Async();
 export default () => {
-  const navigate = useNavigate();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
-  const onCreate = () => {
-    navigate('/device-info/create/0');
+  const [fundsFlowsModalApi, contextFundsFlowsHolder] = Modals.useCourse();
+  const onOpen = (value?: {}) => {
+    fundsFlowsModalApi.ok(async () => {
+      return true;
+    }, undefined, value);
   };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
+    // TODO 22
+    if (eventName === 'EDIT') {
+      onOpen(value);
+    }
     console.log(eventName, value);
   };
   useEffect(() => {
@@ -29,7 +35,10 @@ export default () => {
           code="PROJECT_FUNDS_FLOW"
           request={AutoTableRequest}
           toolBarRender={<>
-            <Button type="primary" onClick={onCreate}>创建设备</Button>
+            <Space>
+              <Button type="primary" onClick={onOpen}>新增支出</Button>
+              <Divider type="vertical" style={{ background: 'rgb(187, 187, 187)' }}/>
+            </Space>
           </>}
           onChangeEvent={async (event, value) => {
             return async.run(async () => {
@@ -39,6 +48,7 @@ export default () => {
           }}
         />
       </MyPageContainer>
+      {contextFundsFlowsHolder}
     </>
   );
 };

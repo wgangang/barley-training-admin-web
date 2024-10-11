@@ -28,9 +28,6 @@ export default () => {
           ref={tableRef}
           code="PROJECT_FUNDS"
           request={AutoTableRequest}
-          toolBarRender={<>
-            <Button type="primary" onClick={onCreate}>创建设备</Button>
-          </>}
           onChangeEvent={async (event, value) => {
             return async.run(async () => {
               return onChangeEvent(event, value);

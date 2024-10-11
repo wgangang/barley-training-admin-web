@@ -25,9 +25,15 @@ const ProjectPage = lazy(() => import('@pages/ProjectPage'));
 const ProjectClassPage = lazy(() => import('@pages/ProjectClassPage'));
 const CoursePage = lazy(() => import('@pages/CoursePage'));
 const CourseSupervisionPage = lazy(() => import('@pages/CourseSupervisionPage'));
+const CourseSignPage = lazy(() => import('@pages/CourseSignPage'));
 const CourseTeacherPricePage = lazy(() => import('@pages/CourseTeacherPricePage'));
 const ProjectFundsPage = lazy(() => import('@pages/ProjectFundsPage'));
 const ProjectFundsFlowPage = lazy(() => import('@pages/ProjectFundsFlowPage'));
+const ProjectFundsSettlementPage = lazy(() => import('@pages/ProjectFundsSettlementPage'));
+
+const ProjectVideoPage = lazy(() => import('@pages/ProjectVideoPage'));
+const ProjectClassroomVisitPage = lazy(() => import('@pages/ProjectClassroomVisitPage'));
+const ProjectStudentStudyPage = lazy(() => import('@pages/ProjectStudentStudyPage'));
 const App: FC = () => {
   return <div>
     <ConfigProvider theme={{
@@ -93,9 +99,15 @@ const App: FC = () => {
           <Route path="/project-class" element={<Suspense><ProjectClassPage/></Suspense>}></Route>
           <Route path="/course" element={<Suspense><CoursePage/></Suspense>}></Route>
           <Route path="/course-supervision" element={<Suspense><CourseSupervisionPage/></Suspense>}></Route>
+          <Route path="/course-sign" element={<Suspense><CourseSignPage/></Suspense>}></Route>
           <Route path="/course-teacher-price" element={<Suspense><CourseTeacherPricePage/></Suspense>}></Route>
           <Route path="/project-funds" element={<Suspense><ProjectFundsPage/></Suspense>}></Route>
           <Route path="/project-funds-flow" element={<Suspense><ProjectFundsFlowPage/></Suspense>}></Route>
+          <Route path="/project-funds-settlement" element={<Suspense><ProjectFundsSettlementPage/></Suspense>}></Route>
+          {/*统计*/}
+          <Route path="/project-video" element={<Suspense><ProjectVideoPage/></Suspense>}></Route>
+          <Route path="/project-classroom-visit" element={<Suspense><ProjectClassroomVisitPage/></Suspense>}></Route>
+          <Route path="/project-student-study" element={<Suspense><ProjectStudentStudyPage/></Suspense>}></Route>
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

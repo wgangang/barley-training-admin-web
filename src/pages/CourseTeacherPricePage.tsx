@@ -12,26 +12,7 @@ export default () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [courseModalApi, contextCourseHolder] = Modals.useCourseTeacherPrice();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
-  const onCreate = () => {
-    onOpen();
-  };
-  const onOpen = (value?: {}) => {
-    courseModalApi.ok(async (params) => {
-      const result = await courseApi?.saveTeacherPrice(params);
-      if (result.success) {
-        messageApi.success('保存成功！');
-        tableRef?.current?.refreshData();
-      } else {
-        messageApi.error(result.message);
-      }
-      return result.success;
-    }, undefined, value);
-  };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
-    if (eventName === 'EDIT') {
-      onOpen(value);
-      return;
-    }
     if (eventName === 'DELETE') {
       const result = await courseApi?.removeTeacherPrice(value.id);
       if (result.success) {
@@ -58,9 +39,6 @@ export default () => {
           ref={tableRef}
           code="COURSE_TEACHER_PRICE"
           request={AutoTableRequest}
-          toolBarRender={<>
-            <Button type="primary" onClick={onCreate}>新增</Button>
-          </>}
           onChangeEvent={async (event, value) => {
             return async.run(async () => {
               return onChangeEvent(event, value);
