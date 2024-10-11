@@ -25,7 +25,9 @@ export const Component: FC<MyPageContainerProps> = (props) => {
   const [isSubpage, setIsSubpage] = useState(false);
   useEffect(() => {
     const paths = location.pathname.split('/');
-    if (paths.length > 2) {
+    const type = (paths[paths.length - 2] || '').toUpperCase();
+    if (type.indexOf('CREATE') > -1 || type.indexOf('EDIT') > -1 ||
+      type.indexOf('PREVIEW') > -1 || type.indexOf('AUDIT') > -1) {
       setIsSubpage(true);
     } else {
       setIsSubpage(false);
