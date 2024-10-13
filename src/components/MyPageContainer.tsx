@@ -13,21 +13,23 @@ export interface Tab extends Omit<TabPaneProps, 'tab'> {
 export declare type MyPageContainerProps = {
   title?: string | undefined
   children?: React.ReactNode | undefined
+  padding?: string | undefined
   tabList?: Tab[]
   onTabChange?: (e: string) => void
   onRefresh?: () => void
 };
-
+const pathPartition: string[] = sessionStorage.getItem('DETAIL_PARTITION') === null
+  ? undefined : JSON.parse(sessionStorage.getItem('DETAIL_PARTITION') || '[]');
 export const Component: FC<MyPageContainerProps> = (props) => {
   const location = useLocation();
   const [messageApi, contextHolder] = message.useMessage();
   const [modal, contextModalHolder] = Modal.useModal();
   const [isSubpage, setIsSubpage] = useState(false);
   useEffect(() => {
-    const paths = location.pathname.split('/');
-    const type = (paths[paths.length - 2] || '').toUpperCase();
-    if (type.indexOf('CREATE') > -1 || type.indexOf('EDIT') > -1 ||
-      type.indexOf('PREVIEW') > -1 || type.indexOf('AUDIT') > -1) {
+    const partition = (pathPartition || ['CREATE', 'EDIT', 'AUDIT', 'PREVIEW', 'DETAIL'])
+      .find(path => location.pathname.toUpperCase()
+        .indexOf(`/${path}/`) > -1);
+    if (partition !== undefined) {
       setIsSubpage(true);
     } else {
       setIsSubpage(false);
@@ -89,7 +91,7 @@ export const Component: FC<MyPageContainerProps> = (props) => {
             onChange={(e) => props?.onTabChange?.(e)}/>
         </> : undefined}
         <div className={css`
-            padding: 12px 16px;
+            padding: ${props?.padding || '12px 16px'}
         `}>
           {props.children}
         </div>

@@ -28,6 +28,7 @@ const CourseSupervisionPage = lazy(() => import('@pages/CourseSupervisionPage'))
 const CourseSignPage = lazy(() => import('@pages/CourseSignPage'));
 const CourseTeacherPricePage = lazy(() => import('@pages/CourseTeacherPricePage'));
 const ProjectFundsPage = lazy(() => import('@pages/ProjectFundsPage'));
+const ProjectFundsDetailPage = lazy(() => import('@pages/detail/ProjectFundsDetailPage'));
 const ProjectFundsFlowPage = lazy(() => import('@pages/ProjectFundsFlowPage'));
 const ProjectFundsSettlementPage = lazy(() => import('@pages/ProjectFundsSettlementPage'));
 
@@ -101,7 +102,9 @@ const App: FC = () => {
           <Route path="/course-supervision" element={<Suspense><CourseSupervisionPage/></Suspense>}></Route>
           <Route path="/course-sign" element={<Suspense><CourseSignPage/></Suspense>}></Route>
           <Route path="/course-teacher-price" element={<Suspense><CourseTeacherPricePage/></Suspense>}></Route>
-          <Route path="/project-funds" element={<Suspense><ProjectFundsPage/></Suspense>}></Route>
+          <Route path="/project-funds" element={<Suspense><ProjectFundsPage/></Suspense>}>
+            <Route path="create/:id" element={<Suspense><ProjectFundsDetailPage/></Suspense>}></Route>
+          </Route>
           <Route path="/project-funds-flow" element={<Suspense><ProjectFundsFlowPage/></Suspense>}></Route>
           <Route path="/project-funds-settlement" element={<Suspense><ProjectFundsSettlementPage/></Suspense>}></Route>
           {/*统计*/}

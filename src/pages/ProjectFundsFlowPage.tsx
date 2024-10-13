@@ -2,21 +2,31 @@ import React, { useEffect, useRef } from 'react';
 import TableAutoDataPanel, { TableAutoDataPanelRef } from 'beer-assembly/TableAutoDataPanel';
 import { AutoTableRequest } from '@apis/report-api';
 import MyPageContainer from '@components/MyPageContainer';
-import { Button, Divider, Space } from 'antd';
+import { Button, message } from 'antd';
+import projectFundsFlowApi from '@apis/project-funds-flow-api';
 import { Async } from '@/utils';
 import { Modals } from '@/Modals';
 
 const async = new Async();
 export default () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
-  const [fundsFlowsModalApi, contextFundsFlowsHolder] = Modals.useCourse();
+  const [fundsFlowsModalApi, contextFundsFlowsHolder] = Modals.useProjectFundsFlow();
   const onOpen = (value?: {}) => {
-    fundsFlowsModalApi.ok(async () => {
-      return true;
+    fundsFlowsModalApi.ok(async (params) => {
+      const result = await projectFundsFlowApi.save(params);
+      if (result.success) {
+        messageApi.success('保存成功！')
+          .then();
+        tableRef?.current?.refreshData();
+      } else {
+        messageApi.error(result.message)
+          .then();
+      }
+      return result.success;
     }, undefined, value);
   };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
-    // TODO 22
     if (eventName === 'EDIT') {
       onOpen(value);
     }
@@ -34,11 +44,8 @@ export default () => {
           ref={tableRef}
           code="PROJECT_FUNDS_FLOW"
           request={AutoTableRequest}
-          toolBarRender={<>
-            <Space>
-              <Button type="primary" onClick={onOpen}>新增支出</Button>
-              <Divider type="vertical" style={{ background: 'rgb(187, 187, 187)' }}/>
-            </Space>
+          headerTitle={<>
+            <Button type="primary" onClick={onOpen}>新增支出</Button>
           </>}
           onChangeEvent={async (event, value) => {
             return async.run(async () => {
@@ -48,6 +55,7 @@ export default () => {
           }}
         />
       </MyPageContainer>
+      {contextHolder}
       {contextFundsFlowsHolder}
     </>
   );

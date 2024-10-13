@@ -22,7 +22,7 @@ const devServerConfig = () => config => {
         // pathRewrite: { '^/api/report': '' },
         headers: {
           uid: '1',
-          authorization: 'Bearer SYSTEM.784313ebd6f1491094f4ea26a65c9c94.670a0ddf'
+          authorization: 'Bearer SYSTEM.b18830c77af24b5faf0e3bc29297e7dd.67147366'
         }
       },
       '/api/usercenter/': {
@@ -30,7 +30,7 @@ const devServerConfig = () => config => {
         changeOrigin: true,
         secure: false,
         headers: {
-          Authorization: 'Bearer SYSTEM.784313ebd6f1491094f4ea26a65c9c94.670a0ddf'
+          Authorization: 'Bearer SYSTEM.b18830c77af24b5faf0e3bc29297e7dd.67147366'
         }
       }
     }
