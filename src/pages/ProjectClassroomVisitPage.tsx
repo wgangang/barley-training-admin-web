@@ -1,5 +1,4 @@
 import React from 'react';
-import MyPageContainer from '@components/MyPageContainer';
 
 export default () => {
   return (
@@ -13,7 +12,8 @@ export default () => {
         </div>
         <div style={{
           flex: 1,
-          backgroundColor: '#000'
+          backgroundColor: '#000',
+          padding: '40px 0'
         }}></div>
       </div>
     </>

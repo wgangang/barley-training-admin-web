@@ -342,6 +342,14 @@ export class Modals {
             </Form.Item>
           </Flux>
           <Flux size={12}>
+            <Form.Item name="classHeader" label="班主任" style={{ width: '100%' }}>
+              <Input></Input>
+            </Form.Item>
+            <Form.Item name="classHeaderPhone" label="班主任电话" style={{ width: '100%' }}>
+              <Input></Input>
+            </Form.Item>
+          </Flux>
+          <Flux size={12}>
             <Form.Item name="classLeader" label="班长" style={{ width: '100%' }}>
               <Input></Input>
             </Form.Item>
@@ -506,7 +514,8 @@ export class Modals {
             <Form.Item name="trainingForm" label="培训形式" style={{ width: '100%' }}>
               <Select options={trainingFormList}></Select>
             </Form.Item>
-            <Form.Item style={{ width: '100%' }}>
+            <Form.Item name="hours" label="课时" style={{ width: '100%' }}>
+              <InputNumber style={{ width: '100%' }} min={1} max={999}></InputNumber>
             </Form.Item>
           </Flux>
           <Form.Item name="trainingContent" label="培训内容" style={{ width: '100%' }}>
