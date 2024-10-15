@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { CSSProperties, FC, useEffect, useState } from 'react';
 import { css } from '@emotion/css';
 import { PageContainer } from '@ant-design/pro-components';
 import { message, Modal, TabPaneProps, Tabs } from 'antd';
@@ -13,7 +13,10 @@ export interface Tab extends Omit<TabPaneProps, 'tab'> {
 export declare type MyPageContainerProps = {
   title?: string | undefined
   children?: React.ReactNode | undefined
-  padding?: string | undefined
+  styles?: {
+    padding?: string | undefined
+    body?: CSSProperties
+  }
   tabList?: Tab[]
   onTabChange?: (e: string) => void
   onRefresh?: () => void
@@ -69,7 +72,9 @@ export const Component: FC<MyPageContainerProps> = (props) => {
             borderBottom: (props?.tabList?.length || 0) <= 0 ? '1px solid rgba(0, 0, 0, 0.06)' : undefined
           }
         }}
-        title={props.title}
+        title={<>
+          {props.title}
+        </>}
         ghost={true}
         childrenContentStyle={{
           padding: '0'
@@ -91,8 +96,8 @@ export const Component: FC<MyPageContainerProps> = (props) => {
             onChange={(e) => props?.onTabChange?.(e)}/>
         </> : undefined}
         <div className={css`
-            padding: ${props?.padding || '12px 16px'}
-        `}>
+            padding: ${props?.styles?.padding || '12px 16px'}
+        `} style={props?.styles?.body}>
           {props.children}
         </div>
       </PageContainer>
