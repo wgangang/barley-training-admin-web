@@ -41,7 +41,7 @@ export default () => {
     navigate(-1);
   };
   useEffect(() => {
-    reportApi.getDataList<[]>('BASIC_DEVICE_LIST', { classRoomId: id })
+    reportApi.getDataList<[]>('BASIC_DEVICE_LIST', { classroomId: id })
       .then(result => {
         setDeviceList(result.data);
       });
