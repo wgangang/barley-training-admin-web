@@ -599,6 +599,7 @@ export class Modals {
     const [form] = Form.useForm();
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [subjectList, setSubjectList] = useState([] as { value: string, label: string }[]);
+    const [projectClassList, setProjectClassList] = useState([]);
     const callbackRef = useRef<((params: ProjectFundsParams) => Promise<boolean>) | undefined>(undefined);
     const onConfirm = async () => {
       if (callbackRef.current) {
@@ -625,6 +626,10 @@ export class Modals {
           .then(result => {
             setSubjectList(result.data);
           });
+        reportApi?.getDataList<[]>('BASIC_PROJECT_CLASS_LIST')
+          .then(result => {
+            setProjectClassList(result.data);
+          });
       }
     };
     return [handler, <>
@@ -646,6 +651,9 @@ export class Modals {
           <Form.Item name="subject" label="分项">
             <Select options={subjectList}></Select>
           </Form.Item>
+          <Form.Item name="projectClassId" label="培训班级">
+            <Select options={projectClassList}></Select>
+          </Form.Item>
           <Form.Item name="amount" label="预算金额">
             <InputNumber style={{ width: '100%' }} min={0} precision={2}></InputNumber>
           </Form.Item>
@@ -658,6 +666,7 @@ export class Modals {
     const [form] = Form.useForm();
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [projectList, setProjectList] = useState([]);
+    const [projectClassList, setProjectClassList] = useState([]);
     const [subjectList, setSubjectList] = useState([]);
     const callbackRef = useRef<((params: ProjectFundsFlowParams) => Promise<boolean>) | undefined>(undefined);
     const onConfirm = async () => {
@@ -686,6 +695,10 @@ export class Modals {
         reportApi?.getDataList<[]>('BASIC_PROJECT_LIST')
           .then(result => {
             setProjectList(result.data);
+          });
+        reportApi?.getDataList<[]>('BASIC_PROJECT_CLASS_LIST')
+          .then(result => {
+            setProjectClassList(result.data);
           });
         reportApi?.getDataList<[]>('BUS_PROJECT_SUBJECT_LIST')
           .then(result => {
@@ -718,12 +731,18 @@ export class Modals {
             </Form.Item>
           </Flux>
           <Flux size={12}>
+            <Form.Item name="projectClassId" label="项目名称" style={{ width: '100%' }}>
+              <Select options={projectClassList}></Select>
+            </Form.Item>
             <Form.Item name="amount" label="金额" style={{ width: '100%' }}>
               <InputNumber style={{ width: '100%' }} min={0} precision={2}></InputNumber>
             </Form.Item>
+          </Flux>
+          <Flux size={12}>
             <Form.Item name="transactionDate" label="支出日期" style={{ width: '100%' }}>
               <DatePicker style={{ width: '100%' }}></DatePicker>
             </Form.Item>
+            <Form.Item style={{ width: '100%' }}></Form.Item>
           </Flux>
         </Form>
       </Modal>
