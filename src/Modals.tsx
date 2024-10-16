@@ -238,7 +238,7 @@ export class Modals {
             padding: '12px 0 0 0'
           }
         }}
-        title="职称管理"
+        title="项目管理"
         width="520px"
         open={isOpenModal}
         onCancel={() => setIsOpenModal(false)}
@@ -259,18 +259,11 @@ export class Modals {
             <Form.Item name="date" label="项目周期" style={{ width: '100%' }}>
               <DatePicker.RangePicker></DatePicker.RangePicker>
             </Form.Item>
-            <Form.Item name="hours" label="课时" style={{ width: '100%' }}>
-              <InputNumber style={{ width: '100%' }} min={1} max={999}></InputNumber>
-            </Form.Item>
-          </Flux>
-          <Flux size={12}>
             <Form.Item name="isDisplay" label="是否公开" style={{ width: '100%' }}>
               <Radio.Group>
                 <Radio value={true}>公开</Radio>
                 <Radio value={false}>隐藏</Radio>
               </Radio.Group>
-            </Form.Item>
-            <Form.Item style={{ width: '100%' }}>
             </Form.Item>
           </Flux>
           <Form.Item name="projectDescription" label="项目简介">

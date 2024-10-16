@@ -75,7 +75,7 @@ export default () => {
       return;
     }
     setProjectItems([]);
-    reportApi.getDataList<{ children: { key: string }[] }[]>('BUS_COURSE_VIDEO_DETAIL', { project })
+    reportApi.getDataList<{ children: { key: string }[] }[]>('BUS_COURSE_ITEMS', { project })
       .then(result => {
         setProjectItems(result.data as never);
         setItem(result.data?.[0]?.children?.[0].key || '');
