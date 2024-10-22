@@ -100,7 +100,7 @@ export default () => {
   }, []);
   return (
     <>
-      <MyPageContainer title="项目全要素数据（项目回访）" styles={{
+      <MyPageContainer title="项目全要素数据（项目回放）" styles={{
         body: {
           display: 'flex',
           justifyContent: 'center'

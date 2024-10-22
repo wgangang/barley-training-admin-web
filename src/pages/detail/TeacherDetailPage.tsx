@@ -39,6 +39,15 @@ export default () => {
       value: ''
     }
   ]);
+  const [attribute, _setAttribute] = useState([
+    {
+      label: '内包',
+      value: 'WITHIN'
+    }, {
+      label: '外包',
+      value: 'OUTSIDE'
+    }
+  ]);
   const [teacherTitleList, setTeacherTitleList] = useState([]);
   const navigate = useNavigate();
   const onConfirm = async () => {
@@ -111,7 +120,6 @@ export default () => {
                   <Select options={teacherTitleList}></Select>
                 </Form.Item>
               </Col>
-
             </Row>
             <Row>
               <Col span={11}>
@@ -127,12 +135,24 @@ export default () => {
             </Row>
             <Row>
               <Col span={11}>
-                <Form.Item label="联系地址" name="address">
+                <Form.Item label="系统内外" name="address">
+                  <Select options={attribute}></Select>
+                </Form.Item>
+              </Col>
+              <Col offset={1} span={11}>
+                <Form.Item label="单位名称" name="companyName">
+                  <Select options={educationList}></Select>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={11}>
+                <Form.Item label="系统内外" name="address">
                   <Input></Input>
                 </Form.Item>
               </Col>
               <Col offset={1} span={11}>
-                <Form.Item label="学历" name="education">
+                <Form.Item label="单位名称" name="education">
                   <Select options={educationList}></Select>
                 </Form.Item>
               </Col>

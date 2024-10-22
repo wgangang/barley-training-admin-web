@@ -64,7 +64,7 @@ export class Modals {
             padding: '12px 0 0 0'
           }
         }}
-        title="职称管理"
+        title="职称（等级）管理"
         width={480}
         open={isOpenModal}
         onCancel={() => setIsOpenModal(false)}
@@ -74,10 +74,10 @@ export class Modals {
             <Input></Input>
           </Form.Item>
           <Flux size={12}>
-            <Form.Item name="code" label="职称代码" style={{ width: '100%' }}>
+            <Form.Item name="code" label="职称（等级）代码" style={{ width: '100%' }}>
               <Input></Input>
             </Form.Item>
-            <Form.Item name="name" label="职称名称" style={{ width: '100%' }}>
+            <Form.Item name="name" label="职称（等级）名称" style={{ width: '100%' }}>
               <Input></Input>
             </Form.Item>
           </Flux>
@@ -317,7 +317,7 @@ export class Modals {
             padding: '12px 0 0 0'
           }
         }}
-        title="班级信息"
+        title="培训班信息"
         width="520px"
         open={isOpenModal}
         onCancel={() => setIsOpenModal(false)}
@@ -330,7 +330,7 @@ export class Modals {
             <Form.Item name="projectId" label="项目" style={{ width: '100%' }}>
               <Select options={projectList}></Select>
             </Form.Item>
-            <Form.Item name="className" label="班级" style={{ width: '100%' }}>
+            <Form.Item name="className" label="培训班名称" style={{ width: '100%' }}>
               <Input></Input>
             </Form.Item>
           </Flux>
@@ -472,15 +472,15 @@ export class Modals {
             <Input></Input>
           </Form.Item>
           <Flux size={12}>
-            <Form.Item name="projectId" label="项目" style={{ width: '100%' }}>
+            <Form.Item name="projectId" label="培训项目" style={{ width: '100%' }}>
               <Select options={projectList}></Select>
             </Form.Item>
-            <Form.Item name="teacherId" label="讲师" style={{ width: '100%' }}>
+            <Form.Item name="teacherId" label="教室名称" style={{ width: '100%' }}>
               <Select options={teacherList}></Select>
             </Form.Item>
           </Flux>
           <Flux size={12}>
-            <Form.Item name="classId" label="班级" style={{ width: '100%' }}>
+            <Form.Item name="classId" label="培训班名称" style={{ width: '100%' }}>
               <Select options={projectClassList}></Select>
             </Form.Item>
             <Form.Item name="classroomId" label="教室" style={{ width: '100%' }}>
@@ -599,6 +599,7 @@ export class Modals {
     const [form] = Form.useForm();
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [subjectList, setSubjectList] = useState([] as { value: string, label: string }[]);
+    const [projectList, setProjectList] = useState([]);
     const [projectClassList, setProjectClassList] = useState([]);
     const callbackRef = useRef<((params: ProjectFundsParams) => Promise<boolean>) | undefined>(undefined);
     const onConfirm = async () => {
@@ -626,6 +627,10 @@ export class Modals {
           .then(result => {
             setSubjectList(result.data);
           });
+        reportApi?.getDataList<[]>('BASIC_PROJECT_LIST')
+          .then(result => {
+            setProjectList(result.data);
+          });
         reportApi?.getDataList<[]>('BASIC_PROJECT_CLASS_LIST')
           .then(result => {
             setProjectClassList(result.data);
@@ -648,15 +653,22 @@ export class Modals {
           <Form.Item name="id" hidden={true}>
             <Input></Input>
           </Form.Item>
-          <Form.Item name="subject" label="分项">
-            <Select options={subjectList}></Select>
-          </Form.Item>
-          <Form.Item name="projectClassId" label="培训班级">
-            <Select options={projectClassList}></Select>
-          </Form.Item>
-          <Form.Item name="amount" label="预算金额">
-            <InputNumber style={{ width: '100%' }} min={0} precision={2}></InputNumber>
-          </Form.Item>
+          <Flux size={12}>
+            <Form.Item name="projectId" label="培训项目" style={{ width: '100%' }}>
+              <Select options={projectList}></Select>
+            </Form.Item>
+            <Form.Item name="projectClassId" label="培训班" style={{ width: '100%' }}>
+              <Select options={projectClassList}></Select>
+            </Form.Item>
+          </Flux>
+          <Flux size={12}>
+            <Form.Item name="subject" label="分项" style={{ width: '100%' }}>
+              <Select options={subjectList}></Select>
+            </Form.Item>
+            <Form.Item name="amount" label="预算金额" style={{ width: '100%' }}>
+              <InputNumber style={{ width: '100%' }} min={0} precision={2}></InputNumber>
+            </Form.Item>
+          </Flux>
         </Form>
       </Modal>
     </>];
@@ -723,7 +735,7 @@ export class Modals {
             <Input></Input>
           </Form.Item>
           <Flux size={12}>
-            <Form.Item name="projectId" label="项目名称" style={{ width: '100%' }}>
+            <Form.Item name="projectId" label="培训项目" style={{ width: '100%' }}>
               <Select options={projectList}></Select>
             </Form.Item>
             <Form.Item name="subject" label="分项" style={{ width: '100%' }}>
@@ -731,7 +743,7 @@ export class Modals {
             </Form.Item>
           </Flux>
           <Flux size={12}>
-            <Form.Item name="projectClassId" label="项目名称" style={{ width: '100%' }}>
+            <Form.Item name="projectClassId" label="培训班" style={{ width: '100%' }}>
               <Select options={projectClassList}></Select>
             </Form.Item>
             <Form.Item name="amount" label="金额" style={{ width: '100%' }}>
