@@ -475,7 +475,7 @@ export class Modals {
             <Form.Item name="projectId" label="培训项目" style={{ width: '100%' }}>
               <Select options={projectList}></Select>
             </Form.Item>
-            <Form.Item name="teacherId" label="教室名称" style={{ width: '100%' }}>
+            <Form.Item name="teacherId" label="教师名称" style={{ width: '100%' }}>
               <Select options={teacherList}></Select>
             </Form.Item>
           </Flux>

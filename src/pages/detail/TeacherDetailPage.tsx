@@ -135,25 +135,13 @@ export default () => {
             </Row>
             <Row>
               <Col span={11}>
-                <Form.Item label="系统内外" name="address">
+                <Form.Item label="系统内外" name="teacherAttribute">
                   <Select options={attribute}></Select>
                 </Form.Item>
               </Col>
               <Col offset={1} span={11}>
                 <Form.Item label="单位名称" name="companyName">
-                  <Select options={educationList}></Select>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={11}>
-                <Form.Item label="系统内外" name="address">
                   <Input></Input>
-                </Form.Item>
-              </Col>
-              <Col offset={1} span={11}>
-                <Form.Item label="单位名称" name="education">
-                  <Select options={educationList}></Select>
                 </Form.Item>
               </Col>
             </Row>

@@ -10,7 +10,7 @@ export default () => {
   }, []);
   return (
     <>
-      <MyPageContainer title="决算表" onRefresh={() => {
+      <MyPageContainer title="结算表" onRefresh={() => {
         tableRef?.current?.refresh();
       }}>
         <TableAutoDataPanel
