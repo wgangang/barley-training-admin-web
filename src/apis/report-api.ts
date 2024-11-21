@@ -4,7 +4,7 @@ import s3Api from '@apis/s3-api';
 class ReportApi extends Fetch {
   search<T>(code: string, params: {}, option?: Option): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.postBody<any>('/report/query/search/' + code, undefined, this.pageParams(params), undefined, option)
+      this.postBody<any>('/query/search/' + code, undefined, this.pageParams(params), undefined, option)
         .then(result => {
           if (!result.success) {
             reject(result.message);
@@ -72,48 +72,48 @@ class ReportApi extends Fetch {
   }
 
   async getConfig<T>(code: string, option?: Option) {
-    return this.get<T>('/report/page/' + code, undefined, undefined, option);
+    return this.get<T>('/page/' + code, undefined, undefined, option);
   }
 
   async getStatistics<T>(code: string, params?: {}, option?: Option) {
-    return this.postBody<T>('/report/query/' + code, undefined, params, option);
+    return this.postBody<T>('/query/' + code, undefined, params, option);
   }
 
   async getDataList<T>(code: string, params?: {}, option?: Option) {
-    return this.postBody<T>('/report/query/list/' + code, {}, params, option);
+    return this.postBody<T>('/query/list/' + code, {}, params, option);
   }
 
   async export<T>(code: string, exportCode: string, name: string, params: {}, option?: Option) {
-    return this.postBody<T>('/report/export/' + code, {
+    return this.postBody<T>('/export/' + code, {
       name,
       exportCode
     }, params, undefined, option);
   }
 
   async getExportTaskList<T>(code: string, option?: Option) {
-    return this.get<T>('/report/export/getExportTaskList/' + code, undefined, undefined, option);
+    return this.get<T>('/export/getExportTaskList/' + code, undefined, undefined, option);
   }
 
   async getImportTaskList<T>(code: string, option?: Option) {
-    return this.get<T>('/report/import/getImportTaskList/' + code, undefined, undefined, option);
+    return this.get<T>('/import/getImportTaskList/' + code, undefined, undefined, option);
   }
 
   async import<T>(code: string, importCode: string, fileName: string, option?: Option) {
-    return this.postBody<T>('/report/import/startImport/' + code, undefined, {
+    return this.postBody<T>('/import/startImport/' + code, undefined, {
       importCode,
       fileName
     }, option);
   }
 
   async importItems<T>(importId: string, items: {}[], option?: Option) {
-    return this.postBody<T>('/report/import/upload', undefined, {
+    return this.postBody<T>('/import/upload', undefined, {
       importId,
       value: items
     }, option);
   }
 
   async importFinish<T>(importId: string, option?: Option) {
-    return this.postBody<T>('/report/import/finish', { importId }, undefined, option);
+    return this.postBody<T>('/import/finish', { importId }, undefined, option);
   }
 }
 

@@ -16,13 +16,22 @@ const devServerConfig = () => config => {
     ...config,
     proxy: {
       '/api': {
-        target: 'http://10.10.2.90',
+        target: 'http://127.0.0.1:8080',
         changeOrigin: true,
         secure: false,
-        // pathRewrite: { '^/api/report': '' },
+        pathRewrite: { '^/api': '' },
         headers: {
           uid: '1',
           authorization: 'Bearer SYSTEM.b18830c77af24b5faf0e3bc29297e7dd.67147366'
+        }
+      },
+      '/api/auth/getSliderImageCode': {
+        target: 'https://data.liexiong.net',
+        changeOrigin: true,
+        secure: false,
+        headers: {
+          uid: '1',
+          authorization: 'Bearer 9c67b878a74848898be92725879e0a84'
         }
       },
       '/api/usercenter/': {
