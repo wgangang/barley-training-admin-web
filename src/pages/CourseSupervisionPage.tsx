@@ -11,7 +11,7 @@ export default () => {
   const navigate = useNavigate();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
   const onCreate = () => {
-    navigate('/device-info/create/0');
+    navigate('/admin/device-info/create/0');
   };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
     console.log(eventName, value);

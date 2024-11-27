@@ -13,7 +13,7 @@ export default () => {
   const [messageApi, contextHolder] = message.useMessage();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
   const onCreate = () => {
-    navigate('/teacher/create/0');
+    navigate('/admin/teacher/create/0');
   };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
     if (eventName === 'DELETE') {

@@ -1,0 +1,10 @@
+<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" class="c-m-sidebar-prefix-icon">
+  <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
+        d="M5.952 3.864a8.185 8.185 0 0 1 10.336 12.594l-2.475-2.475a4.685 4.685 0 1 0-6.626 0l-2.475 2.475a8.185 8.185 0 0 1 1.24-12.594Z"
+        fill="#5E6673"></path>
+  <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M14.893 9.04a4.686 4.686 0 0 1-1.08 4.943l2.475 2.475a8.185 8.185 0 0 0 1.538-9.44L14.893 9.04ZM6.107 9.04a4.685 4.685 0 0 0 1.08 4.943l-2.475 2.475a8.185 8.185 0 0 1-1.538-9.44L6.107 9.04Z"
+        fill="#5E6673"></path>
+  <path d="M9.415 16.923a1.772 1.772 0 0 0 2.173-1.255l.583-9.03-4.01 8.112a1.773 1.773 0 0 0 1.254 2.173Z"
+        fill="#5E6673"></path>
+</svg>

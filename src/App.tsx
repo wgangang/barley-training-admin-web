@@ -1,7 +1,9 @@
 import React, { FC, lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ConfigProvider, theme } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
+import AuthPage from '@pages/auth/AuthPage';
+import AdminLayout from '@pages/layout/AdminLayout';
 
 const HomePage = lazy(() => import('@pages/HomePage'));
 
@@ -69,48 +71,53 @@ const App: FC = () => {
     }} locale={zhCN}>
       <BrowserRouter basename={process.env.ROUTE_BASE || ''}>
         <Routes>
-          <Route path="/home" element={<Suspense><HomePage/></Suspense>}></Route>
-          {/*设备*/}
-          <Route path="/device-info" element={<Suspense><DeviceInfoPage/></Suspense>}>
-            <Route path="create/:id" element={<Suspense><DeviceInfoDetailPage/></Suspense>}/>
-            <Route path="edit/:id" element={<Suspense><DeviceInfoDetailPage/></Suspense>}/>
+          <Route path="/*" element={<Navigate to="/auth"/>}></Route>
+          <Route path="/auth" element={<AuthPage/>}></Route>
+          <Route path="/home" element={<Navigate to="/admin/home"/>}></Route>
+          <Route path="/admin" element={<AdminLayout/>}>
+            <Route path="home" element={<Suspense><HomePage/></Suspense>}></Route>
+            {/*设备*/}
+            <Route path="device-info" element={<Suspense><DeviceInfoPage/></Suspense>}>
+              <Route path="create/:id" element={<Suspense><DeviceInfoDetailPage/></Suspense>}/>
+              <Route path="edit/:id" element={<Suspense><DeviceInfoDetailPage/></Suspense>}/>
+            </Route>
+            {/*教室*/}
+            <Route path="classroom" element={<Suspense><ClassroomPage/></Suspense>}>
+              <Route path="create/:id" element={<Suspense><ClassroomPageDetailPage/></Suspense>}/>
+              <Route path="edit/:id" element={<Suspense><ClassroomPageDetailPage/></Suspense>}/>
+            </Route>
+            <Route path="classroom-reservation" element={<Suspense><ClassroomReservationPage/></Suspense>}>
+              <Route path="create/:id" element={<Suspense><ClassroomReservationDetailPage/></Suspense>}/>
+              <Route path="edit/:id" element={<Suspense><ClassroomReservationDetailPage/></Suspense>}/>
+            </Route>
+            {/*教师*/}
+            <Route path="teacher" element={<Suspense><TeacherPage/></Suspense>}>
+              <Route path="create/:id" element={<Suspense><TeacherDetailPage/></Suspense>}/>
+              <Route path="edit/:id" element={<Suspense><TeacherDetailPage/></Suspense>}/>
+            </Route>
+            <Route path="teacher-title" element={<Suspense><TeacherTitlePage/></Suspense>}></Route>
+            <Route path="teacher-certificate" element={<Suspense><TeacherCertificatePage/></Suspense>}></Route>
+            <Route path="teacher-evaluation" element={<Suspense><TeacherEvaluationPage/></Suspense>}>
+              <Route path="create/:id" element={<Suspense><TeacherEvaluationDetailPage/></Suspense>}/>
+              <Route path="edit/:id" element={<Suspense><TeacherEvaluationDetailPage/></Suspense>}/>
+            </Route>
+            {/*项目*/}
+            <Route path="project" element={<Suspense><ProjectPage/></Suspense>}></Route>
+            <Route path="project-class" element={<Suspense><ProjectClassPage/></Suspense>}></Route>
+            <Route path="course" element={<Suspense><CoursePage/></Suspense>}></Route>
+            <Route path="course-supervision" element={<Suspense><CourseSupervisionPage/></Suspense>}></Route>
+            <Route path="course-sign" element={<Suspense><CourseSignPage/></Suspense>}></Route>
+            <Route path="course-teacher-price" element={<Suspense><CourseTeacherPricePage/></Suspense>}></Route>
+            <Route path="project-funds" element={<Suspense><ProjectFundsPage/></Suspense>}>
+              <Route path="create/:id" element={<Suspense><ProjectFundsDetailPage/></Suspense>}></Route>
+            </Route>
+            <Route path="project-funds-flow" element={<Suspense><ProjectFundsFlowPage/></Suspense>}></Route>
+            <Route path="project-funds-settlement" element={<Suspense><ProjectFundsSettlementPage/></Suspense>}></Route>
+            {/*统计*/}
+            <Route path="project-video" element={<Suspense><ProjectVideoPage/></Suspense>}></Route>
+            <Route path="project-classroom-visit" element={<Suspense><ProjectClassroomVisitPage/></Suspense>}></Route>
+            <Route path="project-student-study" element={<Suspense><ProjectStudentStudyPage/></Suspense>}></Route>
           </Route>
-          {/*教室*/}
-          <Route path="/classroom" element={<Suspense><ClassroomPage/></Suspense>}>
-            <Route path="create/:id" element={<Suspense><ClassroomPageDetailPage/></Suspense>}/>
-            <Route path="edit/:id" element={<Suspense><ClassroomPageDetailPage/></Suspense>}/>
-          </Route>
-          <Route path="/classroom-reservation" element={<Suspense><ClassroomReservationPage/></Suspense>}>
-            <Route path="create/:id" element={<Suspense><ClassroomReservationDetailPage/></Suspense>}/>
-            <Route path="edit/:id" element={<Suspense><ClassroomReservationDetailPage/></Suspense>}/>
-          </Route>
-          {/*教师*/}
-          <Route path="/teacher" element={<Suspense><TeacherPage/></Suspense>}>
-            <Route path="create/:id" element={<Suspense><TeacherDetailPage/></Suspense>}/>
-            <Route path="edit/:id" element={<Suspense><TeacherDetailPage/></Suspense>}/>
-          </Route>
-          <Route path="/teacher-title" element={<Suspense><TeacherTitlePage/></Suspense>}></Route>
-          <Route path="/teacher-certificate" element={<Suspense><TeacherCertificatePage/></Suspense>}></Route>
-          <Route path="/teacher-evaluation" element={<Suspense><TeacherEvaluationPage/></Suspense>}>
-            <Route path="create/:id" element={<Suspense><TeacherEvaluationDetailPage/></Suspense>}/>
-            <Route path="edit/:id" element={<Suspense><TeacherEvaluationDetailPage/></Suspense>}/>
-          </Route>
-          {/*项目*/}
-          <Route path="/project" element={<Suspense><ProjectPage/></Suspense>}></Route>
-          <Route path="/project-class" element={<Suspense><ProjectClassPage/></Suspense>}></Route>
-          <Route path="/course" element={<Suspense><CoursePage/></Suspense>}></Route>
-          <Route path="/course-supervision" element={<Suspense><CourseSupervisionPage/></Suspense>}></Route>
-          <Route path="/course-sign" element={<Suspense><CourseSignPage/></Suspense>}></Route>
-          <Route path="/course-teacher-price" element={<Suspense><CourseTeacherPricePage/></Suspense>}></Route>
-          <Route path="/project-funds" element={<Suspense><ProjectFundsPage/></Suspense>}>
-            <Route path="create/:id" element={<Suspense><ProjectFundsDetailPage/></Suspense>}></Route>
-          </Route>
-          <Route path="/project-funds-flow" element={<Suspense><ProjectFundsFlowPage/></Suspense>}></Route>
-          <Route path="/project-funds-settlement" element={<Suspense><ProjectFundsSettlementPage/></Suspense>}></Route>
-          {/*统计*/}
-          <Route path="/project-video" element={<Suspense><ProjectVideoPage/></Suspense>}></Route>
-          <Route path="/project-classroom-visit" element={<Suspense><ProjectClassroomVisitPage/></Suspense>}></Route>
-          <Route path="/project-student-study" element={<Suspense><ProjectStudentStudyPage/></Suspense>}></Route>
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

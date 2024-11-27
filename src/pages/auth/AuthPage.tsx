@@ -1,7 +1,6 @@
 import React from 'react';
 import AuthLayout from 'beer-assembly-biz/auth/AuthStyle02';
 import authApi from '@apis/auth-api';
-import { Slider } from 'beer-assembly/SliderCode';
 
 export default () => {
   return (
@@ -10,14 +9,10 @@ export default () => {
         colorPrimary="#1677ff"
         logo={{
           path: '/logo.png',
-          height: 28
+          height: 42
         }}
-        description="大麦教培"
+        description="大麦教培系统"
         copyright=""
-        requestSlider={async () => {
-          const result = await authApi.getSliderImageCode<Slider>();
-          return result?.data;
-        }}
         systemLogin={async (params) => {
           return authApi.login(params);
         }}

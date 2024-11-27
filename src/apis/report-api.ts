@@ -76,7 +76,7 @@ class ReportApi extends Fetch {
   }
 
   async getStatistics<T>(code: string, params?: {}, option?: Option) {
-    return this.postBody<T>('/query/' + code, undefined, params, option);
+    return this.postBody<T>('/query/get/' + code, undefined, params, option);
   }
 
   async getDataList<T>(code: string, params?: {}, option?: Option) {
@@ -128,7 +128,7 @@ export const AutoTableRequest = {
       const original = (result?.data as any);
       const data = original?.page?.[0];
       if (data !== undefined) {
-        data.code = original.code;
+        data.code = code;
         data.name = original.name;
       }
       return {

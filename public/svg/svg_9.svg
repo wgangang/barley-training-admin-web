@@ -1,0 +1,16 @@
+<svg class="force-icon force-icon-data-platform-p c-m-sidebar-prefix-icon" width="1em" height="1em" viewBox="0 0 49 48"
+     fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="12.047" y="4.806" width="31" height="31" rx="2" fill="#B5BCC9"></rect>
+  <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M6.97656 10.3242C5.87199 10.3242 4.97656 11.2196 4.97656 12.3242V41.3243C4.97656 42.4289 5.87199 43.3243 6.97656 43.3243H36.0586C37.1632 43.3243 38.0586 42.4289 38.0586 41.3243V12.3242C38.0586 11.2196 37.1632 10.3242 36.0586 10.3242H6.97656Z"
+        fill="url(#svg_ca5e931028__paint0_linear_7496_35604)"></path>
+  <path fill="#B5BCC9" d="M11.307 24.229H15.307V36.141999999999996H11.307zM19.518 20.547H23.518V36.142H19.518z"></path>
+  <path fill="#fff" d="M27.729 17.507H31.729V36.142H27.729z"></path>
+  <defs>
+    <linearGradient id="svg_ca5e931028__paint0_linear_7496_35604" x1="21.518" y1="10.324" x2="21.518" y2="43.324"
+                    gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818A9C"></stop>
+      <stop offset="1" stop-color="#353D51"></stop>
+    </linearGradient>
+  </defs>
+</svg>
