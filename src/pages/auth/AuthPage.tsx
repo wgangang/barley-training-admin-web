@@ -11,7 +11,7 @@ export default () => {
           path: '/logo.png',
           height: 42
         }}
-        description="大麦教培系统"
+        description="培训项目管理系统"
         copyright=""
         systemLogin={async (params) => {
           return authApi.login(params);
