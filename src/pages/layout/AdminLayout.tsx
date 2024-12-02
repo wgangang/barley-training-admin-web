@@ -12,8 +12,8 @@ export default () => {
   const navigate = useNavigate();
   const [app] = useState({
     key: '0',
-    name: '职业认定系统',
-    description: '对职业认定发放考试',
+    name: '培训项目管理系统',
+    description: '',
     icon: '/douyin.png'
   } as App);
   const [apps] = useState([app] as App[]);
