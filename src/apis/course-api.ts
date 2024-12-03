@@ -19,5 +19,5 @@ class CourseApi extends Fetch {
   }
 }
 
-const api = new CourseApi((process.env.REQUEST_BASE_URL || '') + '/barley');
+const api = new CourseApi((process.env.REQUEST_BASE_URL || ''));
 export default api;

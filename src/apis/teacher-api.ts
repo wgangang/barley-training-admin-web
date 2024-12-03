@@ -34,5 +34,5 @@ class TeacherApi extends Fetch {
   }
 }
 
-const api = new TeacherApi((process.env.REQUEST_BASE_URL || '') + '/barley');
+const api = new TeacherApi((process.env.REQUEST_BASE_URL || ''));
 export default api;

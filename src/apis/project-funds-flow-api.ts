@@ -6,5 +6,5 @@ class ProjectFundsFlowApi extends Fetch {
   }
 }
 
-const api = new ProjectFundsFlowApi((process.env.REQUEST_BASE_URL || '') + '/barley');
+const api = new ProjectFundsFlowApi((process.env.REQUEST_BASE_URL || ''));
 export default api;
