@@ -167,7 +167,7 @@ export default () => {
               </Col>
             </Row>
             <Row>
-              <Form.Item label="附件" name="files">
+              <Form.Item label="附件" name="images">
                 <ImagesContainer
                   action={process.env.IMAGE_URL || ''}
                   requestUrl={async (url) => s3Api.getUrl(url)
