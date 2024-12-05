@@ -24,5 +24,5 @@ class S3Api extends Fetch {
   }
 }
 
-const api = new S3Api((process.env.REQUEST_BASE_URL || '') + '/supply-chain');
+const api = new S3Api(process.env.REQUEST_BASE_URL || '');
 export default api;

@@ -6,7 +6,7 @@ import store from '@/store';
 import App from '@/App';
 
 declare const window: { __POWERED_BY_QIANKUN__: any };
-const APP_NAME = 'billbear-supply-chain-web';
+const APP_NAME = 'barley-training-admin-web';
 
 let root: Root | undefined;
 const render = (props: any) => {
