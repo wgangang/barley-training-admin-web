@@ -8,10 +8,10 @@ export default () => {
       <AuthLayout
         colorPrimary="#1677ff"
         logo={{
-          path: '/logo.png',
-          height: 42
+          path: '/logo.png'
+          // height: 42
         }}
-        description="培训项目管理系统"
+        description="智能培训系统"
         copyright=""
         systemLogin={async (params) => {
           return authApi.login(params);

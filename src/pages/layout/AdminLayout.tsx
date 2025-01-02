@@ -12,7 +12,7 @@ export default () => {
   const navigate = useNavigate();
   const [app] = useState({
     key: '0',
-    name: '培训项目管理系统',
+    name: '智能培训系统',
     description: '',
     icon: '/douyin.png'
   } as App);

@@ -3,19 +3,19 @@ import Fetch from 'beer-network/api';
 class ProjectApi extends Fetch {
 
   async save(params: {}) {
-    return this.postBody('/project/save', undefined, params);
+    return this.postBody('/admin/project/save', undefined, params);
   }
 
   async remove(id: string) {
-    return this.delete('/project/' + id);
+    return this.delete('/admin/project/' + id);
   }
 
   async saveClass(params: {}) {
-    return this.postBody('/project/class/save', undefined, params);
+    return this.postBody('/admin/project/class/save', undefined, params);
   }
 
   async removeClass(id: string) {
-    return this.delete('/project/class/' + id);
+    return this.delete('/admin/project/class/' + id);
   }
 }
 

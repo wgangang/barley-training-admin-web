@@ -2,7 +2,7 @@ import Fetch from 'beer-network/api';
 
 class ProjectFundsFlowApi extends Fetch {
   async save(params: {}) {
-    return this.postBody('/project/funds/flow/save', undefined, params);
+    return this.postBody('/admin/project/funds/flow/save', undefined, params);
   }
 }
 

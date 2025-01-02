@@ -3,19 +3,19 @@ import Fetch from 'beer-network/api';
 class CourseApi extends Fetch {
 
   async save(params: {}) {
-    return this.postBody('/course/save', undefined, params);
+    return this.postBody('/admin/course/save', undefined, params);
   }
 
   async remove(id: string) {
-    return this.delete('/course/' + id);
+    return this.delete('/admin/course/' + id);
   }
 
   async saveTeacherPrice(params: {}) {
-    return this.postBody('/course/teacher-price/save', undefined, params);
+    return this.postBody('/admin/course/teacher-price/save', undefined, params);
   }
 
   async removeTeacherPrice(id: string) {
-    return this.delete('/course/teacher-price/' + id);
+    return this.delete('/admin/course/teacher-price/' + id);
   }
 }
 

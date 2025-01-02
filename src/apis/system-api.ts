@@ -2,7 +2,7 @@ import Fetch from 'beer-network/api';
 
 class SystemApi extends Fetch {
   async getTreeMenus<T>() {
-    return this.get<T>('/system/getTreeMenus');
+    return this.get<T>('/admin/system/getTreeMenus');
   }
 }
 

@@ -3,19 +3,19 @@ import Fetch from 'beer-network/api';
 class ClassroomApi extends Fetch {
 
   async save(params: {}) {
-    return this.postBody('/classroom/save', undefined, params);
+    return this.postBody('/admin/classroom/save', undefined, params);
   }
 
   async remove(id: string) {
-    return this.delete('/classroom/' + id);
+    return this.delete('/admin/classroom/' + id);
   }
 
   async saveReservation(params: any) {
-    return this.postBody('/classroom/reservation/save', undefined, params);
+    return this.postBody('/admin/classroom/reservation/save', undefined, params);
   }
 
   async removeReservation(id: string) {
-    return this.delete('/classroom/reservation/' + id);
+    return this.delete('/admin/classroom/reservation/' + id);
   }
 }
 

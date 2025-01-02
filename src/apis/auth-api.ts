@@ -6,11 +6,11 @@ class AuthApi extends Fetch {
   }
 
   async login(params: {}) {
-    return this.postBody<boolean>('/auth/login', undefined, params);
+    return this.postBody<boolean>('/admin/auth/login', undefined, params);
   }
 
   async getUserInfo<T>() {
-    return this.get<T>('/auth/get');
+    return this.get<T>('/admin/auth/get');
   }
 }
 
