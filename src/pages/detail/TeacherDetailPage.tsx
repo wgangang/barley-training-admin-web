@@ -3,7 +3,7 @@ import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
 import { Button, Col, DatePicker, Form, Input, Radio, Row, Select, Space } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
-import ImagesContainer from 'beer-assembly/ImagesContainer';
+import Images from 'beer-assembly/Images';
 import dayjs from 'dayjs';
 import s3Api from '@apis/s3-api';
 import teacherApi from '@apis/teacher-api';
@@ -96,7 +96,7 @@ export default () => {
             </Form.Item>
             <Row>
               <Form.Item label="教师头像" name="images">
-                <ImagesContainer
+                <Images
                   action={process.env.IMAGE_URL || ''}
                   maxLength={1}
                   buttonText="教师头像照片"
@@ -178,7 +178,7 @@ export default () => {
             </Row>
             <Row>
               <Form.Item label="附件" name="files">
-                <ImagesContainer
+                <Images
                   action={process.env.IMAGE_URL || ''}
                   buttonText="上传简历"
                   fileTypes={['doc', 'docx', 'pdf']}

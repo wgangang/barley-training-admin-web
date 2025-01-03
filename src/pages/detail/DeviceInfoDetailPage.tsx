@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
 import MyCard from '@components/MyCard';
 import { Button, Col, DatePicker, Form, Input, Row, Select, Space } from 'antd';
-import ImagesContainer from 'beer-assembly/ImagesContainer';
+import Images from 'beer-assembly/Images';
 import s3Api from '@apis/s3-api';
 import reportApi from '@apis/report-api';
 import dayjs from 'dayjs';
@@ -118,7 +118,7 @@ export default () => {
             </Row>
             <Row>
               <Form.Item label="附件" name="images">
-                <ImagesContainer
+                <Images
                   action={process.env.IMAGE_URL || ''}
                   buttonText="上传设备图片"
                   requestUrl={async (url) => s3Api.getUrl(url)

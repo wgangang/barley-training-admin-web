@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
-import ImagesContainer from 'beer-assembly/ImagesContainer';
+import Images from 'beer-assembly/Images';
 import s3Api from '@apis/s3-api';
 import MyCard from '@components/MyCard';
 import { DatePicker, Button, Col, Form, Input, Row, Select, Space, InputNumber, TimePicker } from 'antd';
@@ -157,7 +157,7 @@ export default () => {
             </Row>
             <Row>
               <Form.Item label="课件信息" name="files">
-                <ImagesContainer
+                <Images
                   action={process.env.IMAGE_URL || ''}
                   fileTypes={['png', 'jpg', 'doc', 'docx', 'pdf']}
                   maxLength={1}

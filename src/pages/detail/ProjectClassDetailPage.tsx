@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
-import ImagesContainer from 'beer-assembly/ImagesContainer';
+import Images from 'beer-assembly/Images';
 import s3Api from '@apis/s3-api';
 import MyCard from '@components/MyCard';
 import { Button, Col, Form, Input, Row, Select, Space } from 'antd';
@@ -155,7 +155,7 @@ export default () => {
             </Row>
             <Row>
               <Form.Item label="班级图片" name="images">
-                <ImagesContainer
+                <Images
                   action={process.env.IMAGE_URL || ''}
                   maxLength={1}
                   buttonText="上传班级图片"
