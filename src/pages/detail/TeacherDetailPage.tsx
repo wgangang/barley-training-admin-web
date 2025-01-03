@@ -95,6 +95,16 @@ export default () => {
               <Input></Input>
             </Form.Item>
             <Row>
+              <Form.Item label="教师头像" name="images">
+                <ImagesContainer
+                  action={process.env.IMAGE_URL || ''}
+                  maxLength={1}
+                  buttonText="教师头像照片"
+                  requestUrl={async (url) => s3Api.getUrl(url)
+                    .then(a => a.data)}/>
+              </Form.Item>
+            </Row>
+            <Row>
               <Col span={11}>
                 <Form.Item label="姓名" name="name">
                   <Input></Input>
@@ -167,9 +177,12 @@ export default () => {
               </Col>
             </Row>
             <Row>
-              <Form.Item label="附件" name="images">
+              <Form.Item label="附件" name="files">
                 <ImagesContainer
                   action={process.env.IMAGE_URL || ''}
+                  buttonText="上传简历"
+                  fileTypes={['doc', 'docx', 'pdf']}
+                  fileTypeErrorMessage="只能上传doc、docx、pdf文件"
                   requestUrl={async (url) => s3Api.getUrl(url)
                     .then(a => a.data)}/>
               </Form.Item>

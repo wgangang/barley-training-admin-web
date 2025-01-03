@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import BackPageContainer from '@components/BackPageContainer';
+import ImagesContainer from 'beer-assembly/ImagesContainer';
+import s3Api from '@apis/s3-api';
 import MyCard from '@components/MyCard';
 import { Button, Col, Form, Input, Row, Select, Space } from 'antd';
 import reportApi from '@apis/report-api';
@@ -81,9 +83,19 @@ export default () => {
               </Col>
               <Col offset={1} span={11}>
                 <Form.Item label="教室类型" name="type">
-                  <Select options={classroomList}/>
+                  <Select options={classroomList} />
                 </Form.Item>
               </Col>
+            </Row>
+            <Row>
+              <Form.Item label="教室图片" name="images">
+                <ImagesContainer
+                  action={process.env.IMAGE_URL || ''}
+                  maxLength={1}
+                  buttonText="上传教室图片"
+                  requestUrl={async (url) => s3Api.getUrl(url)
+                    .then(a => a.data)} />
+              </Form.Item>
             </Row>
             <Form.Item label="设备列表" name="device">
               <Select options={deviceList} mode="multiple"></Select>

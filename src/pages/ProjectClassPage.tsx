@@ -4,34 +4,18 @@ import { AutoTableRequest } from '@apis/report-api';
 import projectApi from '@apis/project-api';
 import MyPageContainer from '@components/MyPageContainer';
 import { Button, message } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import { Async } from '@/utils';
-import { Modals } from '@/Modals';
 
 const async = new Async();
 export default () => {
+  const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
-  const [projectClassModalApi, contextProjectClassHolder] = Modals.useProjectClass();
   const tableRef = useRef<TableAutoDataPanelRef>(null);
   const onCreate = () => {
-    onOpen();
-  };
-  const onOpen = (value?: {}) => {
-    projectClassModalApi.ok(async (params) => {
-      const result = await projectApi?.saveClass(params);
-      if (result.success) {
-        messageApi.success('保存成功！');
-        tableRef?.current?.refreshData();
-      } else {
-        messageApi.error(result.message);
-      }
-      return result.success;
-    }, undefined, value);
+    navigate('/admin/project-class/create/0');
   };
   const onChangeEvent = async (eventName: string, value: { id: string }) => {
-    if (eventName === 'EDIT') {
-      onOpen(value);
-      return;
-    }
     if (eventName === 'DELETE') {
       const result = await projectApi?.removeClass(value.id);
       if (result.success) {
@@ -52,14 +36,14 @@ export default () => {
   return (
     <>
       <MyPageContainer title="班级信息" onRefresh={() => {
-        tableRef?.current?.refresh();
+        tableRef?.current?.refreshData();
       }}>
         <TableAutoDataPanel
           ref={tableRef}
           code="PROJECT_CLASS"
           request={AutoTableRequest}
           toolBarRender={<>
-            <Button type="primary" onClick={onCreate}>新增</Button>
+            <Button type="primary" onClick={onCreate}>创建</Button>
           </>}
           onChangeEvent={async (event, value) => {
             return async.run(async () => {
@@ -70,7 +54,6 @@ export default () => {
         />
       </MyPageContainer>
       {contextHolder}
-      {contextProjectClassHolder}
     </>
   );
 };

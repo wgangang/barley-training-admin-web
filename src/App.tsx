@@ -11,7 +11,7 @@ const DeviceInfoPage = lazy(() => import('@pages/DeviceInfoPage'));
 const DeviceInfoDetailPage = lazy(() => import('@pages/detail/DeviceInfoDetailPage'));
 
 const ClassroomPage = lazy(() => import('@pages/ClassroomPage'));
-const ClassroomPageDetailPage = lazy(() => import('@pages/detail/ClassroomPageDetailPage'));
+const ClassroomPageDetailPage = lazy(() => import('@pages/detail/ClassroomDetailPage'));
 
 const ClassroomReservationPage = lazy(() => import('@pages/ClassroomReservationPage'));
 const ClassroomReservationDetailPage = lazy(() => import('@pages/detail/ClassroomReservationDetailPage'));
@@ -24,8 +24,12 @@ const TeacherEvaluationPage = lazy(() => import('@pages/TeacherEvaluationPage'))
 const TeacherEvaluationDetailPage = lazy(() => import('@pages/detail/TeacherEvaluationDetailPage'));
 
 const ProjectPage = lazy(() => import('@pages/ProjectPage'));
-const ProjectClassPage = lazy(() => import('@pages/ProjectClassPage'));
-const CoursePage = lazy(() => import('@pages/CoursePage'));
+const ProjectClassPage = lazy(() => import('@/pages/ProjectClassPage'));
+const ProjectClassDetailPage = lazy(() => import('@pages/detail/ProjectClassDetailPage'));
+
+const CoursePage = lazy(() => import('@/pages/CoursePage'));
+const CourseDetailPage = lazy(() => import('@pages/detail/CourseDetailPage'));
+
 const CourseSupervisionPage = lazy(() => import('@pages/CourseSupervisionPage'));
 const CourseSignPage = lazy(() => import('@pages/CourseSignPage'));
 const CourseTeacherPricePage = lazy(() => import('@pages/CourseTeacherPricePage'));
@@ -71,52 +75,58 @@ const App: FC = () => {
     }} locale={zhCN}>
       <BrowserRouter basename={process.env.ROUTE_BASE || ''}>
         <Routes>
-          <Route path="/*" element={<Navigate to="/auth"/>}></Route>
-          <Route path="/auth" element={<AuthPage/>}></Route>
-          <Route path="/home" element={<Navigate to="/admin/home"/>}></Route>
-          <Route path="/admin" element={<AdminLayout/>}>
-            <Route path="home" element={<Suspense><HomePage/></Suspense>}></Route>
+          <Route path="/*" element={<Navigate to="/auth" />}></Route>
+          <Route path="/auth" element={<AuthPage />}></Route>
+          <Route path="/home" element={<Navigate to="/admin/home" />}></Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="home" element={<Suspense><HomePage /></Suspense>}></Route>
             {/*设备*/}
-            <Route path="device-info" element={<Suspense><DeviceInfoPage/></Suspense>}>
-              <Route path="create/:id" element={<Suspense><DeviceInfoDetailPage/></Suspense>}/>
-              <Route path="edit/:id" element={<Suspense><DeviceInfoDetailPage/></Suspense>}/>
+            <Route path="device-info" element={<Suspense><DeviceInfoPage /></Suspense>}>
+              <Route path="create/:id" element={<Suspense><DeviceInfoDetailPage /></Suspense>} />
+              <Route path="edit/:id" element={<Suspense><DeviceInfoDetailPage /></Suspense>} />
             </Route>
             {/*教室*/}
-            <Route path="classroom" element={<Suspense><ClassroomPage/></Suspense>}>
-              <Route path="create/:id" element={<Suspense><ClassroomPageDetailPage/></Suspense>}/>
-              <Route path="edit/:id" element={<Suspense><ClassroomPageDetailPage/></Suspense>}/>
+            <Route path="classroom" element={<Suspense><ClassroomPage /></Suspense>}>
+              <Route path="create/:id" element={<Suspense><ClassroomPageDetailPage /></Suspense>} />
+              <Route path="edit/:id" element={<Suspense><ClassroomPageDetailPage /></Suspense>} />
             </Route>
-            <Route path="classroom-reservation" element={<Suspense><ClassroomReservationPage/></Suspense>}>
-              <Route path="create/:id" element={<Suspense><ClassroomReservationDetailPage/></Suspense>}/>
-              <Route path="edit/:id" element={<Suspense><ClassroomReservationDetailPage/></Suspense>}/>
+            <Route path="classroom-reservation" element={<Suspense><ClassroomReservationPage /></Suspense>}>
+              <Route path="create/:id" element={<Suspense><ClassroomReservationDetailPage /></Suspense>} />
+              <Route path="edit/:id" element={<Suspense><ClassroomReservationDetailPage /></Suspense>} />
             </Route>
             {/*教师*/}
-            <Route path="teacher" element={<Suspense><TeacherPage/></Suspense>}>
-              <Route path="create/:id" element={<Suspense><TeacherDetailPage/></Suspense>}/>
-              <Route path="edit/:id" element={<Suspense><TeacherDetailPage/></Suspense>}/>
+            <Route path="teacher" element={<Suspense><TeacherPage /></Suspense>}>
+              <Route path="create/:id" element={<Suspense><TeacherDetailPage /></Suspense>} />
+              <Route path="edit/:id" element={<Suspense><TeacherDetailPage /></Suspense>} />
             </Route>
-            <Route path="teacher-title" element={<Suspense><TeacherTitlePage/></Suspense>}></Route>
-            <Route path="teacher-certificate" element={<Suspense><TeacherCertificatePage/></Suspense>}></Route>
-            <Route path="teacher-evaluation" element={<Suspense><TeacherEvaluationPage/></Suspense>}>
-              <Route path="create/:id" element={<Suspense><TeacherEvaluationDetailPage/></Suspense>}/>
-              <Route path="edit/:id" element={<Suspense><TeacherEvaluationDetailPage/></Suspense>}/>
+            <Route path="teacher-title" element={<Suspense><TeacherTitlePage /></Suspense>}></Route>
+            <Route path="teacher-certificate" element={<Suspense><TeacherCertificatePage /></Suspense>}></Route>
+            <Route path="teacher-evaluation" element={<Suspense><TeacherEvaluationPage /></Suspense>}>
+              <Route path="create/:id" element={<Suspense><TeacherEvaluationDetailPage /></Suspense>} />
+              <Route path="edit/:id" element={<Suspense><TeacherEvaluationDetailPage /></Suspense>} />
             </Route>
             {/*项目*/}
-            <Route path="project" element={<Suspense><ProjectPage/></Suspense>}></Route>
-            <Route path="project-class" element={<Suspense><ProjectClassPage/></Suspense>}></Route>
-            <Route path="course" element={<Suspense><CoursePage/></Suspense>}></Route>
-            <Route path="course-supervision" element={<Suspense><CourseSupervisionPage/></Suspense>}></Route>
-            <Route path="course-sign" element={<Suspense><CourseSignPage/></Suspense>}></Route>
-            <Route path="course-teacher-price" element={<Suspense><CourseTeacherPricePage/></Suspense>}></Route>
-            <Route path="project-funds" element={<Suspense><ProjectFundsPage/></Suspense>}>
-              <Route path="create/:id" element={<Suspense><ProjectFundsDetailPage/></Suspense>}></Route>
+            <Route path="project" element={<Suspense><ProjectPage /></Suspense>}></Route>
+            <Route path="project-class" element={<Suspense><ProjectClassPage /></Suspense>}>
+              <Route path="create/:id" element={<Suspense><ProjectClassDetailPage /></Suspense>}></Route>
+              <Route path="edit/:id" element={<Suspense><ProjectClassDetailPage /></Suspense>}></Route>
             </Route>
-            <Route path="project-funds-flow" element={<Suspense><ProjectFundsFlowPage/></Suspense>}></Route>
-            <Route path="project-funds-settlement" element={<Suspense><ProjectFundsSettlementPage/></Suspense>}></Route>
+            <Route path="course" element={<Suspense><CoursePage /></Suspense>}>
+              <Route path="create/:id" element={<Suspense><CourseDetailPage /></Suspense>}></Route>
+              <Route path="edit/:id" element={<Suspense><CourseDetailPage /></Suspense>}></Route>
+            </Route>
+            <Route path="course-supervision" element={<Suspense><CourseSupervisionPage /></Suspense>}></Route>
+            <Route path="course-sign" element={<Suspense><CourseSignPage /></Suspense>}></Route>
+            <Route path="course-teacher-price" element={<Suspense><CourseTeacherPricePage /></Suspense>}></Route>
+            <Route path="project-funds" element={<Suspense><ProjectFundsPage /></Suspense>}>
+              <Route path="create/:id" element={<Suspense><ProjectFundsDetailPage /></Suspense>}></Route>
+            </Route>
+            <Route path="project-funds-flow" element={<Suspense><ProjectFundsFlowPage /></Suspense>}></Route>
+            <Route path="project-funds-settlement" element={<Suspense><ProjectFundsSettlementPage /></Suspense>}></Route>
             {/*统计*/}
-            <Route path="project-video" element={<Suspense><ProjectVideoPage/></Suspense>}></Route>
-            <Route path="project-classroom-visit" element={<Suspense><ProjectClassroomVisitPage/></Suspense>}></Route>
-            <Route path="project-student-study" element={<Suspense><ProjectStudentStudyPage/></Suspense>}></Route>
+            <Route path="project-video" element={<Suspense><ProjectVideoPage /></Suspense>}></Route>
+            <Route path="project-classroom-visit" element={<Suspense><ProjectClassroomVisitPage /></Suspense>}></Route>
+            <Route path="project-student-study" element={<Suspense><ProjectStudentStudyPage /></Suspense>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
