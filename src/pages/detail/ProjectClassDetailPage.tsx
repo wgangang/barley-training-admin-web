@@ -153,6 +153,13 @@ export default () => {
                 </Form.Item>
               </Col>
             </Row>
+            <Row >
+              <Col span={23}>
+                <Form.Item label="简介" name="remarks">
+                  <Input.TextArea rows={3} style={{ width: '100%' }}></Input.TextArea>
+                </Form.Item>
+              </Col>
+            </Row>
             <Row>
               <Form.Item label="班级图片" name="images">
                 <Images

@@ -19,12 +19,31 @@ export default () => {
     if (eventName === 'DELETE') {
       const result = await courseApi?.remove(value.id);
       if (result.success) {
-        messageApi.success('删除成功！')
-          .then();
+        messageApi.success('删除成功！').then();
         tableRef?.current?.refreshData();
       } else {
         messageApi.error(result.message)
           .then();
+      }
+      return;
+    }
+    if (eventName === 'LIVE') {
+      const result = await courseApi?.live(value.id);
+      if (result.success) {
+        messageApi.success('预约成功！').then();
+        tableRef?.current?.refreshData();
+      } else {
+        messageApi.error(result.message).then();
+      }
+      return;
+    }
+    if (eventName === 'DELETE_LIVE') {
+      const result = await courseApi?.liveDelete(value.id);
+      if (result.success) {
+        messageApi.success('取消成功！').then();
+        tableRef?.current?.refreshData();
+      } else {
+        messageApi.error(result.message).then();
       }
       return;
     }

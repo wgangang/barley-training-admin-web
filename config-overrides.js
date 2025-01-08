@@ -22,7 +22,7 @@ const devServerConfig = () => config => {
         pathRewrite: { '^/api': '' },
         headers: {
           uid: '1',
-          authorization: 'Bearer SYSTEM.b18830c77af24b5faf0e3bc29297e7dd.67147366'
+          // authorization: 'Bearer SYSTEM.b18830c77af24b5faf0e3bc29297e7dd.67147366'
         }
       },
       '/api/auth/getSliderImageCode': {
@@ -31,15 +31,7 @@ const devServerConfig = () => config => {
         secure: false,
         headers: {
           uid: '1',
-          authorization: 'Bearer 9c67b878a74848898be92725879e0a84'
-        }
-      },
-      '/api/usercenter/': {
-        target: 'http://10.10.2.90',
-        changeOrigin: true,
-        secure: false,
-        headers: {
-          Authorization: 'Bearer SYSTEM.b18830c77af24b5faf0e3bc29297e7dd.67147366'
+          // authorization: 'Bearer 9c67b878a74848898be92725879e0a84'
         }
       }
     }

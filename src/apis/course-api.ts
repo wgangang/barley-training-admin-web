@@ -17,6 +17,18 @@ class CourseApi extends Fetch {
   async removeTeacherPrice(id: string) {
     return this.delete('/admin/course/teacher-price/' + id);
   }
+
+  async live(id: string) {
+    return this.get('/admin/course/live/' + id);
+  }
+
+  async liveDelete(id: string) {
+    return this.delete('/admin/course/live/' + id);
+  }
+
+  async liveDetail(id: string) {
+    return this.get('/admin/course/live/detail/' + id);
+  }
 }
 
 const api = new CourseApi((process.env.REQUEST_BASE_URL || ''));

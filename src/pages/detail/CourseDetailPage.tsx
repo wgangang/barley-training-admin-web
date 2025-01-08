@@ -97,8 +97,8 @@ export default () => {
                 </Form.Item>
               </Col>
               <Col offset={1} span={11}>
-                <Form.Item name="teacherId" label="教师名称" style={{ width: '100%' }}>
-                  <Select options={teacherList}></Select>
+                <Form.Item name="courseName" label="培训主题" style={{ width: '100%' }}>
+                  <Input></Input>
                 </Form.Item>
               </Col>
             </Row>
@@ -116,6 +116,30 @@ export default () => {
             </Row>
             <Row>
               <Col span={11}>
+                <Form.Item name="teacherId" label="教师名称" style={{ width: '100%' }}>
+                  <Select options={teacherList}></Select>
+                </Form.Item>
+              </Col>
+              <Col offset={1} span={11}>
+                <Form.Item name="date" label="培训日期" style={{ width: '100%' }}>
+                  <DatePicker style={{ width: '100%' }}></DatePicker>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={11}>
+                <Form.Item name="time" label="培训时间" style={{ width: '100%' }}>
+                  <TimePicker.RangePicker style={{ width: '100%' }}></TimePicker.RangePicker>
+                </Form.Item>
+              </Col>
+              <Col offset={1} span={11}>
+                <Form.Item name="hours" label="课时" style={{ width: '100%' }}>
+                  <InputNumber style={{ width: '100%' }} min={1} max={999}></InputNumber>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={11}>
                 <Form.Item name="supervise" label="督导员" style={{ width: '100%' }}>
                   <Input></Input>
                 </Form.Item>
@@ -128,45 +152,49 @@ export default () => {
             </Row>
             <Row>
               <Col span={11}>
-                <Form.Item name="date" label="培训日期" style={{ width: '100%' }}>
-                  <DatePicker style={{ width: '100%' }}></DatePicker>
-                </Form.Item>
-              </Col>
-              <Col offset={1} span={11}>
-                <Form.Item name="time" label="培训时间" style={{ width: '100%' }}>
-                  <TimePicker.RangePicker style={{ width: '100%' }}></TimePicker.RangePicker>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={11}>
                 <Form.Item name="trainingForm" label="培训形式" style={{ width: '100%' }}>
                   <Select options={trainingFormList}></Select>
                 </Form.Item>
               </Col>
               <Col offset={1} span={11}>
-                <Form.Item name="hours" label="课时" style={{ width: '100%' }}>
-                  <InputNumber style={{ width: '100%' }} min={1} max={999}></InputNumber>
-                </Form.Item>
               </Col>
             </Row>
             <Row>
-              <Form.Item name="trainingContent" label="培训内容" style={{ width: '100%' }}>
-                <Input.TextArea rows={3}></Input.TextArea>
-              </Form.Item>
+              <Col span={23}>
+                <Form.Item name="trainingContent" label="培训内容" style={{ width: '100%' }}>
+                  <Input.TextArea rows={3}></Input.TextArea>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row >
+              <Col span={23}>
+                <Form.Item label="备注" name="remarks">
+                  <Input.TextArea rows={3} style={{ width: '100%' }}></Input.TextArea>
+                </Form.Item>
+              </Col>
             </Row>
             <Row>
               <Form.Item label="课件信息" name="files">
                 <Images
                   action={process.env.IMAGE_URL || ''}
                   fileTypes={['png', 'jpg', 'doc', 'docx', 'pdf']}
-                  maxLength={1}
                   buttonText="上传课件"
                   requestUrl={async (url) => s3Api.getUrl(url)
                     .then(a => a.data)} />
               </Form.Item>
             </Row>
           </Form>
+          <Row style={{ marginBottom: 24 }}>
+            <Col>
+              <Space size={16}>
+                预约信息
+              </Space>
+            </Col>
+          </Row>
+          <Row>
+
+          </Row>
+
           <Row style={{ marginTop: 24 }}>
             <Col>
               <Space size={16}>
