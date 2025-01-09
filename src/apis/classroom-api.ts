@@ -17,6 +17,10 @@ class ClassroomApi extends Fetch {
   async removeReservation(id: string) {
     return this.delete('/admin/classroom/reservation/' + id);
   }
+
+  async inspect<T>() {
+    return this.get<T>('/admin/classroom/inspect');
+  }
 }
 
 const api = new ClassroomApi((process.env.REQUEST_BASE_URL || ''));

@@ -19,15 +19,23 @@ class CourseApi extends Fetch {
   }
 
   async live(id: string) {
-    return this.get('/admin/course/live/' + id);
+    return this.get<boolean>('/admin/course/live/' + id);
   }
 
   async liveDelete(id: string) {
-    return this.delete('/admin/course/live/' + id);
+    return this.delete<boolean>('/admin/course/live/' + id);
   }
 
-  async liveDetail(id: string) {
-    return this.get('/admin/course/live/detail/' + id);
+  async liveDetail<T>(id: string) {
+    return this.get<T>('/admin/course/live/detail/' + id);
+  }
+
+  async listCourse<T>(id: string) {
+    return this.get<T>('/admin/course/list/' + id);
+  }
+
+  async video<T>(id: string) {
+    return this.get<T>('/admin/course/video/' + id);
   }
 }
 

@@ -15,9 +15,9 @@ export default () => {
   const onCreate = () => {
     navigate('/admin/course/create/0');
   };
-  const onChangeEvent = async (eventName: string, value: { id: string }) => {
+  const onChangeEvent = async (eventName: string, value: { id: string, liveId?: string }) => {
     if (eventName === 'DELETE') {
-      const result = await courseApi?.remove(value.id);
+      const result = await courseApi.remove(value.id);
       if (result.success) {
         messageApi.success('删除成功！').then();
         tableRef?.current?.refreshData();
@@ -28,7 +28,11 @@ export default () => {
       return;
     }
     if (eventName === 'LIVE') {
-      const result = await courseApi?.live(value.id);
+      if (value.liveId) {
+        messageApi.success('请先取消预约！').then();
+        return;
+      }
+      const result = await courseApi.live(value.id);
       if (result.success) {
         messageApi.success('预约成功！').then();
         tableRef?.current?.refreshData();
@@ -38,7 +42,11 @@ export default () => {
       return;
     }
     if (eventName === 'DELETE_LIVE') {
-      const result = await courseApi?.liveDelete(value.id);
+      if (!value.liveId) {
+        messageApi.success('请先预约！').then();
+        return;
+      }
+      const result = await courseApi.liveDelete(value.id);
       if (result.success) {
         messageApi.success('取消成功！').then();
         tableRef?.current?.refreshData();

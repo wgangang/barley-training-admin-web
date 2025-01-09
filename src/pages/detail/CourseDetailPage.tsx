@@ -16,6 +16,7 @@ export default () => {
     messageApi
   } = useContext(ParentContext);
   const [form] = Form.useForm();
+  const [detail, setDetail] = useState<any>({});
   const navigate = useNavigate();
   const { id } = useParams();
   const [projectList, setProjectList] = useState([]);
@@ -71,6 +72,14 @@ export default () => {
     if (id === undefined || id === '') {
       return;
     }
+
+    courseApi.liveDetail(id)
+      .then(result => {
+        if (!result.success) {
+          return;
+        }
+        setDetail(result.data);
+      });
 
     reportApi.getStatistics<{ time: string, date: string }>('BUS_COURSE_INFO', { id })
       .then(result => {
@@ -184,16 +193,6 @@ export default () => {
               </Form.Item>
             </Row>
           </Form>
-          <Row style={{ marginBottom: 24 }}>
-            <Col>
-              <Space size={16}>
-                预约信息
-              </Space>
-            </Col>
-          </Row>
-          <Row>
-
-          </Row>
 
           <Row style={{ marginTop: 24 }}>
             <Col>
@@ -204,7 +203,46 @@ export default () => {
             </Col>
           </Row>
         </MyCard>
-      </BackPageContainer>
+
+        <MyCard title="录播预约信息" width={800}>
+          <Row style={{ marginBottom: 12 }}>
+            <Col span={11}>
+              <label>预约ID：</label>
+              <span>{detail.liveId}</span>
+            </Col>
+            <Col offset={1} span={11}>
+              <label>预约时间：</label>
+              <span>{detail.createTime}</span>
+            </Col>
+          </Row>
+          <Row style={{ marginBottom: 12 }}>
+            <Col span={11}>
+              <label>录播开始时间：</label>
+              <span>{detail.startTime}</span>
+            </Col>
+            <Col offset={1} span={11}>
+              <label>录播结束时间：</label>
+              <span>{detail.endTime}</span>
+            </Col>
+          </Row>
+          <Row style={{ marginBottom: 12 }}>
+            <Col span={11}>
+              <label>直播状态</label>
+              <span>{detail.statusText}</span>
+            </Col>
+            <Col offset={1} span={11}>
+              <label>检查状态：</label>
+              <span>{detail.examineStatusText}</span>
+            </Col>
+          </Row>
+          <Row style={{ marginBottom: 12 }}>
+            <Col span={22}>
+              <label>m3u8Url：</label>
+              <span>{detail.m3u8Url}</span>
+            </Col>
+          </Row>
+        </MyCard>
+      </BackPageContainer >
     </>
   );
 };
