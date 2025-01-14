@@ -38,7 +38,7 @@ export default () => {
         toLink={(path) => {
           navigate(path);
         }}>
-        <Outlet/>
+        <Outlet />
       </AppLayout>
     </>
   );
